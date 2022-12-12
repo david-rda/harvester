@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+@import "./variables.scss";
+@import "./media.scss";
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #F7F7F7;
+}
+
+.container {
+    border-radius: 6px;
+}
+
+.login_email, .login_pass {
+    border-radius: 8px;
+    border: 1px solid lighten(#787878, 45%);
+    background-color: #FFF;
+    outline: none;
+    padding: 12px 14px;
+    width: 100%;
+    font-family: "frutiger_light";
+    font-size: 14px;
+}
+
+.card {
+    border: 1px solid lighten(#787878, 45%);
+}
+
+label {
+    font-family: "frutiger_bold";
+    font-size: 14px;
+}
+
+button[type=submit], button {
+    padding: 12px 14px;
+    border: none;
+    outline: none;
+    font-family: "frutiger_bold_caps";
+    background-color: $lightgreen;
+    color: $darkgreen;
+    border-radius: 6px;
+
+    &:hover {
+        background-color: darken($darkgreen, 5%);
+        color: #fff;
+    }
+}
+
+ul {
+    font-family: "frutiger_light";
+    font-size: 14px;
+}
+
+.form-control, .form-select {
+    border: none;
+    outline: none;
+    box-shadow: none;
+
+    &:focus {
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+h6 {
+    font-family: "frutiger_bold_caps";
+    border-bottom: 2px solid $darkgreen;
+    color: $darkgreen;
+    padding: 10px;
+    user-select: none;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file_block {
+    border-radius: 4px;
+    background-color: rgba($lightgreen, 0.3);
+    display: flex !important;
+    align-items: center !important;
+
+    span {
+        padding-left: 20px;
+        font-size: 14px;
+        font-family: "frutiger_regular";
+        user-select: none;
+    }
+}
+
+.excel-download-bar {
+    overflow: hidden;
+    user-select: none;
+    padding: 14px;
+    font-size: 14px;
+    font-family: "frutiger_regular";
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    height: 55px;
+    cursor: pointer;
+
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.input-group-text {
+    padding: 12px 14px;
+    border: none;
+    border-radius: 8px 0px 0px 8px;
+    font-family: "frutiger_light_caps";
+    font-size: 15px;
+    user-select: none;
+}
+
+.igt {
+    padding: 12px 14px;
+    border: none;
+    border-radius: 0px 8px 8px 0px;
+    font-family: "frutiger_light_caps";
+    font-size: 15px;
+    user-select: none;
+}

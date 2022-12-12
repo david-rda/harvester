@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+@media screen and (max-width: 768px) {
+    .flex-wrap {
+        .btn {
+            border-radius: 0px;
+            border: 1px solid $darkgreen;
+        }
+    }
+}

@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "frutiger_black";
+    src: url("../fonts/Linotype\ -\ Neue\ Frutiger\ Georgian\ Black.otf");
+}
+
+@font-face {
+    font-family: "frutiger_bold";
+    src: url("../fonts//Linotype\ -\ Neue\ Frutiger\ Georgian\ Bold.otf");
+}
+
+@font-face {
+    font-family: "frutiger_light";
+    src: url("../fonts/Linotype\ -\ Neue\ Frutiger\ Georgian\ Light.otf");
+}
+
+@font-face {
+    font-family: "frutiger_regular";
+    src: url("../fonts/Linotype\ -\ Neue\ Frutiger\ Georgian\ Regular.otf");
+}
+
+/* ქვემოთ მოცემული ფონტები წარმოდგენილია მაღალი რეგისტრის სიმბოლოებით */
+@font-face {
+    font-family: "frutiger_black_caps";
+    src: url("../fonts/NeueFrutigerGeorgianCAPS-Black.ttf");
+}
+
+@font-face {
+    font-family: "frutiger_bold_caps";
+    src: url("../fonts/NeueFrutigerGeorgianCAPS-Bold.ttf");
+}
+
+@font-face {
+    font-family: "frutiger_light_caps";
+    src: url("../fonts/NeueFrutigerGeorgianCAPS-Light.ttf");
+}
+
+@font-face {
+    font-family: "frutiger_regular_caps";
+    src: url("../fonts/NeueFrutigerGeorgianCAPS-Regular.ttf");
+}
