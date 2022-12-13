@@ -32,7 +32,7 @@ class AuthController extends Controller implements IAuth
      * @param Request
      * @return json
      */
-    public function Login(Request $request) {
+    public function Login(AuthRequest $request) {
         $validated = $this->ValidateData($request);
 
         $credentials = array(

@@ -73,7 +73,7 @@
                             position : "top-end"
                         });
                         return false;
-                    }else if(!this.email.match(/^[a-zA-Z0-9]+@{1}[a-zA-Z]+\.[a-zA-Z]{2,3}$/)) {
+                    }else if(!this.email.match(/^[a-zA-Z0-9]*\.+[a-zA-Z0-9]+@{1}[a-zA-Z]+\.[a-zA-Z]{2,3}$/)) {
                         this.$swal({
                             title : "შეიყვანეთ სწორი ფორმატის ელ. ფოსტა",
                             icon : "warning",

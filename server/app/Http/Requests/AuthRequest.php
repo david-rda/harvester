@@ -13,7 +13,7 @@ class AuthRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,17 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "email" => "required|email",
+            "password" => "required|min:4|max:30"
+        ];
+    }
+
+    public function messages() {
+        return [
+            "email.required" => "ელ. ფოსტა აუცილებელია.",
+            "password.required" => "პაროლი აუცილებელია.",
+            "password.min" => "პაროლი უნდა შედგებოდეს მინიმუმ 4 სიმბოლოსგან.",
+            "password.max" => "პაროლის სიმბოლოთა რაოდენობა არ უნდა აღემატებოდეს 30-ს."
         ];
     }
 }

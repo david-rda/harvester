@@ -7,6 +7,6 @@
     interface IAuth {  
         public function ValidateData(AuthRequest $request); // ავტორიზაციის მონაცემთა ვალიდაცია  
         
-        public function Login(Request $request); // ავტორიზაციის მეთოდი
+        public function Login(AuthRequest $request); // ავტორიზაციის მეთოდი
     }
 ?>
