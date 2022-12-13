@@ -99,6 +99,7 @@
                         });
                         // ლოკალურ საცავში შეინახება ავტორიზაციისას დაგენერირებული access ტოკენი
                         window.localStorage.setItem("token", login_data?.data?.token);
+                        window.localStorage.setItem("user_id", login_data?.data?.user?.user_id);
 
                         this.$router.push("/user/info");
                     }

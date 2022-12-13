@@ -66,8 +66,15 @@
 
         methods : {
             async logout() {
-                const logout = await axios.post("/logout");
-                console.log(logout?.data);
+                try {
+                    await axios.post("/logout");
+                    
+                    window.localStorage.clear();
+
+                    this.$router.push("/");
+                }catch(err) {
+                    this.$router.push("/user/info");
+                }
             }
         }
     }

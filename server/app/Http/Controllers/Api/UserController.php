@@ -51,5 +51,15 @@ class UserController extends Controller implements IRegister
             }
         }
     }
+
+    /**
+     * ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
+     * @method GET
+     * @param int $id
+     * @return json
+     */
+    public function User_Get($id) {
+        return User::find(Auth::id());
+    }
 }
 ?>

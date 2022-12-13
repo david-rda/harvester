@@ -63,7 +63,7 @@
         async mounted() {
             document.title = "ინფორმაცია";
 
-            const info = await axios.get("/user/info");
+            const info = await axios.get("/user/get/" + window.localStorage.getItem("user_id"));
             this.user_info = info?.data;
             console.log(info?.data);
         },
