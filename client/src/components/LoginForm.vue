@@ -105,7 +105,10 @@
                     }
                 }catch(err) {
                     if(err instanceof AxiosError) {
-                        this.errors = err?.response?.data;
+                        this.$swal({
+                            title : "ელ. ფოსტა ან პაროლი არასწორია",
+                            icon : "error",
+                        });
                     }
                 }
             }

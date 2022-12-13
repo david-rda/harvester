@@ -9,7 +9,7 @@
                         <form method="POST" @submit.prevent="change_password()">
                             <div class="mb-3">
                                 <label for="old_password" class="mb-2">ძველი პეროლი</label>
-                                <input type="password" class="form-control" name="old_password" id="old_password" v-model="old_password" placeholder="ძველი პაროლი">
+                                <input type="password" class="form-control" name="old_password" id="old_password" v-model="current_password" placeholder="ძველი პაროლი">
                             </div>
                             <div class="mb-3">
                                 <label for="new_password" class="mb-2">ახალი პაროლი</label>
@@ -43,7 +43,7 @@
 
         data() {
             return {
-                old_password : "",
+                current_password : "",
                 new_password : "",
                 confirm_password : ""
             }
@@ -52,7 +52,7 @@
         methods : {
             async change_password() {
                 try {
-                    if(this.old_password == null || this.old_password == "") {
+                    if(this.current_password == null || this.current_password == "") {
                         this.$swal({
                             title : "შეიყვანეთ მიმდინარე პაროლი",
                             icon : "warning",
@@ -93,21 +93,23 @@
                         });
                         return false;
                     }else {
+                        await axios.put("/password/change", {
+                            current_password : this.current_password,
+                            new_password : this.new_password,
+                            confirm_password : this.confirm_password
+                        });
+
                         this.$swal({
                             title : "პაროლი ცვლილება წარმატებით განხორციელდა",
                             icon : "success"
                         });
-                        
-                        const change_pass = await axios.put("/password/change", {
-                            old_password : this.old_password,
-                            new_password : this.new_password
-                        });
-
-                        console.log(change_pass?.data);
                     }
                 }catch(err) {
                     if(err instanceof AxiosError) {
-                        console.log(err);
+                        this.$swal({
+                            title : "დაფიქსირდა შეცდომა",
+                            icon : "error"
+                        });
                     }
                 }
             }

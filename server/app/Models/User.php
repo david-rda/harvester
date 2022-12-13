@@ -48,11 +48,4 @@ class User extends Authenticatable
             set : fn($value) => $this->birthDate = $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("d-m-Y")
         );
     }
-
-    // მოცემული მეთოდი პასუხისმგებელია ბაზაში პაროლის ჩაწერისას მის დაშიფვრაზე
-    public function password() : Attribute {
-        return Attribute::make(
-            set : fn($value) => $this->password = bcrypt($value)
-        );
-    }
 }

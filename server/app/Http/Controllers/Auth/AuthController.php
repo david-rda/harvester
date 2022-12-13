@@ -51,7 +51,7 @@ class AuthController extends Controller implements IAuth
             }else {
                 return response()->json([
                     "login_error" => "ელ. ფოსტა ან პაროლი არასწორია."
-                ], 403);
+                ], 422);
             }
         }else {
             return response()->json([

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\PasswordController;
 
 Route::post("/login", [AuthController::class, "Login"]); // ავტორიზაციის მარშუტი
 Route::post("/register", [UserController::class, "Register"]); // რეგისტრაციის მარშუტი
@@ -15,6 +16,10 @@ Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
     Route::get("/get/{id}", [UserController::class, "User_Get"])->where(["id" => "[0-9]+"]);
 
     Route::put("info/update", [UserController::class, "Update_Info"]);
+});
+
+Route::group(["prefix" => "password", "middleware" => "auth:api"], function() {
+    Route::put("/change", [PasswordController::class, "ChangePassword"]);
 });
 
 ?>
