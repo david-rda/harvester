@@ -100,7 +100,7 @@
                         // ლოკალურ საცავში შეინახება ავტორიზაციისას დაგენერირებული access ტოკენი
                         window.localStorage.setItem("token", login_data?.data?.token);
 
-                        this.$router.push("/home");
+                        this.$router.push("/user/info");
                     }
                 }catch(err) {
                     if(err instanceof AxiosError) {

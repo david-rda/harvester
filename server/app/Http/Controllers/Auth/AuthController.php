@@ -33,17 +33,17 @@ class AuthController extends Controller implements IAuth
      * @return json
      */
     public function Login(AuthRequest $request) {
-        $validated = $this->ValidateData($request);
-
+        $validated = $this->ValidateData($request); // მოცემული მეტოდი აბრუნებს ლოგიკურ მნიშვნელბას
+        
         $credentials = array(
-            "email" => $request->email,
-            "password" => $request->password
+            "email" => trim($request->validated()["email"]), // მომხმარებლის მიერ შეყვანილი ელ. ფოსტა
+            "password" => trim($request->validated()["password"]) // მომხმარებლის მიერ შეყვანილი პაროლი
         );
 
         if($validated) {
             if(Auth::attempt($credentials)) {
                 $token = Auth::user()->createToken("TOKEN")->accessToken;
-
+                
                 return response()->json([
                     "user" => Auth::user(),
                     "token" => $token
