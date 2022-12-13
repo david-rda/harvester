@@ -127,10 +127,25 @@
                         });
                         return false;
                     }else {
-                        this.$swal({
-                            title : "ინფორმაცია დარედაქტირდა",
-                            icon : "success",
-                        });
+                        try {
+                            await axios.put("/user/info/update", {
+                                name : this.firstname,
+                                lastname : this.lastname,
+                                birth_date : this.bd,
+                                mobile_number : this.phone,
+                            });
+                            this.$swal({
+                                title : "ინფორმაცია დარედაქტირდა",
+                                icon : "success",
+                            });
+                        }catch(err) {
+                            if(err instanceof AxiosError) {
+                                this.$swal({
+                                    title : "დაფიქსირდა შეცდომა",
+                                    icon : "error",
+                                });
+                            }
+                        }
                     }
                 }catch(err) {
                     if(err instanceof AxiosError) {

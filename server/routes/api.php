@@ -13,6 +13,8 @@ Route::post("/logout", [LogoutController::class, "Logout"])->middleware("auth:ap
 
 Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
     Route::get("/get/{id}", [UserController::class, "User_Get"])->where(["id" => "[0-9]+"]);
+
+    Route::put("info/update", [UserController::class, "Update_Info"]);
 });
 
 ?>

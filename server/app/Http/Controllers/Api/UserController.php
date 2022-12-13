@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Interfaces\IRegister;
+use App\Http\Requests\InfoRequest;
+use App\Http\Interfaces\IUser;
 use App\Models\User;
 use Auth;
 use Hash;
 
-class UserController extends Controller implements IRegister
+class UserController extends Controller implements IUser
 {
     // მომხმარებლის სარეგისტრაციო მონაცემების გაფილტვრა
     public function ValidateRegisterData(Request $request) {
@@ -75,14 +76,28 @@ class UserController extends Controller implements IRegister
         $validated = $request->validated();
 
         if($validated) {
-            $user = User::find(Auth::id());
+            try {
+                $user = User::find(Auth::id());
 
-            $user->name = $validated["name"];
-            $user->lastname = $validated["lastname"];
-            $user->birth_date = $validated["birth_date"];
-            $user->mobile_number = $validated["mobile_number"];
+                $user->name = $validated["name"];
+                $user->lastname = $validated["lastname"];
+                $user->birth_date = $validated["birth_date"];
+                $user->mobile_number = $validated["mobile_number"];
 
-            $user->save();
+                $user->save();
+
+                return response()->json([
+                    "message" => "ინფორმაცია განახლდა."
+                ], 200);
+            }catch(Exception $e) {
+                return response()->json([
+                    "error" => "ინფორმაცია ვერ განახლდა."
+                ], 422);
+            }
+        }else {
+            return response()->json([
+                "error" => "შეიყვანეტ სწორი ფორმატის მონაცემები."
+            ], 422);
         }
     }
 }
