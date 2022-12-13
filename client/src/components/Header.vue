@@ -24,7 +24,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto text-center">
                     <li class="nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>{{ "სახელი გვარი" }}</strong></a>
+                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>{{ this.user }}</strong></a>
 
                         <ul class="dropdown-menu">
                             <li>
@@ -60,7 +60,8 @@
         },
 
         async mounted() {
-            const user = await axios.get("/user/get");
+            const id = window.localStorage.getItem("user_id");
+            const user = await axios.get("/user/get/" + Number.parseInt(id));
             this.user = user?.data?.name + " " + user?.data?.lastname;
         },
 
@@ -68,7 +69,7 @@
             async logout() {
                 try {
                     await axios.post("/logout");
-                    
+
                     window.localStorage.clear();
 
                     this.$router.push("/");

@@ -45,7 +45,7 @@
             return {
                 firstname : "", // ბენეფიციარის სახელი
                 lastname : "", // ბენეფიციარის გვარი
-                bd : "", // ბენეფიციარის დაბადების თარიღი
+                bd : new Date(), // ბენეფიციარის დაბადების თარიღი
                 phone : "" // ბენეფიციარის ტელეფონი
             }
         },
@@ -53,8 +53,14 @@
         async mounted() {
             document.title = "პროფილი - პირადი ინფორმაცია";
 
-            const user = await axios.get("/user/get");
-            this.user_data = user?.data;
+            const id = window.localStorage.getItem("user_id");
+
+            const info = await axios.get("/user/get/" + Number.parseInt(id));
+            
+            this.firstname = info?.data?.name;
+            this.lastname = info?.data?.lastname;
+            this.bd = info?.data?.birth_date;
+            this.phone = info?.data?.mobile_number;
         },
 
         methods : {

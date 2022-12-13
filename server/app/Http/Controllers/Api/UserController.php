@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Interfaces\IRegister;
 use App\Models\User;
+use Auth;
+use Hash;
 
 class UserController extends Controller implements IRegister
 {
+    // მომხმარებლის სარეგისტრაციო მონაცემების გაფილტვრა
     public function ValidateRegisterData(Request $request) {
         try {
             $this->validate($request, [
@@ -60,6 +63,27 @@ class UserController extends Controller implements IRegister
      */
     public function User_Get($id) {
         return User::find(Auth::id());
+    }
+
+    /**
+     * მომხმარებლის ინფორმაციის განახლების მეტოდი
+     * @method PUT
+     * @param Request
+     * @return json
+     */
+    public function Update_Info(InfoRequest $request) {
+        $validated = $request->validated();
+
+        if($validated) {
+            $user = User::find(Auth::id());
+
+            $user->name = $validated["name"];
+            $user->lastname = $validated["lastname"];
+            $user->birth_date = $validated["birth_date"];
+            $user->mobile_number = $validated["mobile_number"];
+
+            $user->save();
+        }
     }
 }
 ?>

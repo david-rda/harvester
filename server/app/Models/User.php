@@ -27,7 +27,8 @@ class User extends Authenticatable
         "personal_id",
         "mobile_number",
         "email",
-        "password"
+        "password",
+        //"status"
     ];
 
     protected $primaryKey = "id";

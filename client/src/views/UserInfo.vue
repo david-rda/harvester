@@ -17,23 +17,23 @@
                             </tr>
                             <tr>
                                 <td class="p-3">სახელი, გვარი</td>
-                                <td class="p-3"><strong>{{ "სახელი გვარი" }}</strong></td>
+                                <td class="p-3"><strong>{{ this?.user_info?.name + " " + this?.user_info?.lastname }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="p-3">ტელეფონის ნომერი</td>
-                                <td class="p-3"><strong>595871123</strong></td>
+                                <td class="p-3"><strong>{{ this?.user_info?.mobile_number }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="p-3">ელ. ფოსტა</td>
-                                <td class="p-3"><strong>beneficiary@rda.gov.ge</strong></td>
+                                <td class="p-3"><strong>{{ this?.user_info?.email }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="p-3">პირადი ნომერი</td>
-                                <td class="p-3"><strong>59001112323</strong></td>
+                                <td class="p-3"><strong>{{ this?.user_info?.personal_id }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="p-3">დაბადების თარიღი</td>
-                                <td class="p-3"><strong>07/06/1999</strong></td>
+                                <td class="p-3"><strong>{{ this?.user_info?.birth_date }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -63,9 +63,10 @@
         async mounted() {
             document.title = "ინფორმაცია";
 
-            const info = await axios.get("/user/get/" + window.localStorage.getItem("user_id"));
+            const id = window.localStorage.getItem("user_id");
+
+            const info = await axios.get("/user/get/" + Number.parseInt(id));
             this.user_info = info?.data;
-            console.log(info?.data);
         },
 
         methods : {
