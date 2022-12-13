@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Interfaces\IRegister;
+use App\Models\User;
 
 class UserController extends Controller implements IRegister
 {
@@ -14,8 +15,8 @@ class UserController extends Controller implements IRegister
                 "name" => "required|string",
                 "lastname" => "required|string",
                 "birth_date" => "required",
-                "personal_id" => "required|number",
-                "mobile_number" => "required|number",
+                "personal_id" => "required|numeric",
+                "mobile_number" => "required|numeric",
                 "email" => "required|string",
                 "password" => "required|string|min:4|max:30",
                 "confirm_password" => "required|string|same:password"
@@ -38,17 +39,7 @@ class UserController extends Controller implements IRegister
 
         if($validated) {
             try {
-                $user = new User(); // მომხმარებლის მოდელის ობიექტი
-
-                $user->name = $request->name;
-                $user->lastname = $request->lastname;
-                $user->birth_date = $request->birth_date;
-                $user->personal_id = $request->personal_id;
-                $user->mobile_number = $request->mobile_number;
-                $user->email = $request->email;
-                $user->password = $request->password;
-                
-                $user->save(); // მითითებული მონაცემების შენახვა
+                User::create($request->all());
 
                 return response()->json([
                     "message" => "რეგისტრაცია წარმატებით დასრულდა."

@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = "users";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,22 +39,19 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     // მოცემული მეთოდი პასუხისმგებელია ბაზაში დაბადების თარიღის ფორმატის სტილის ჩაწერაზე
     public function birthDate() : Attribute {
         return Attribute::make(
-            set : fn($value) => $this->birthDate = $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->formate("d-m-Y")
+            set : fn($value) => $this->birthDate = $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("d-m-Y")
+        );
+    }
+
+    // მოცემული მეთოდი პასუხისმგებელია ბაზაში პაროლის ჩაწერისას მის დაშიფვრაზე
+    public function password() : Attribute {
+        return Attribute::make(
+            set : fn($value) => $this->password = bcrypt($value)
         );
     }
 }

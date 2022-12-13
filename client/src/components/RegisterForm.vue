@@ -217,7 +217,17 @@
                         });
                         return false;
                     }else {
-                        const register = await axios.post("/register");
+                        const register = await axios.post("/register", {
+                            name : this.firstname,
+                            lastname : this.lastname,
+                            birth_date : this.bdate,
+                            personal_id : this.pid,
+                            mobile_number : this.phone,
+                            email : this.email,
+                            password : this.password,
+                            confirm_password : this.confirm_password
+                        });
+
                         console.log(register?.data);
                     }
                 }catch(err) {
