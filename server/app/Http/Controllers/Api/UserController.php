@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Interfaces\IRegister;
 
-class UserController extends Controller
+class UserController extends Controller implements IRegister
 {
     public function ValidateRegisterData(Request $request) {
         try {
@@ -33,7 +34,31 @@ class UserController extends Controller
      * @return json
      */
     public function Register(Request $request) {
+        $validated = $this->ValidateRegisterData($request);
 
+        if($validated) {
+            try {
+                $user = new User(); // მომხმარებლის მოდელის ობიექტი
+
+                $user->name = $request->name;
+                $user->lastname = $request->lastname;
+                $user->birth_date = $request->birth_date;
+                $user->personal_id = $request->personal_id;
+                $user->mobile_number = $request->mobile_number;
+                $user->email = $request->email;
+                $user->password = $request->password;
+                
+                $user->save(); // მითითებული მონაცემების შენახვა
+
+                return response()->json([
+                    "message" => "რეგისტრაცია წარმატებით დასრულდა."
+                ], 200);
+            }catch(Exception $e) {
+                return response()->json([
+                    "register_error" => "რეგისტრაცია ვერ განხორციელდა."
+                ], 422);
+            }
+        }
     }
 }
 ?>
