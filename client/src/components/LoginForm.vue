@@ -97,10 +97,14 @@
                             email : this.email.trim(), // ელ.ფოსტის ველის მნიშვნელობა
                             password : this.password.trim() // პაროლის ველის მნიშვნელობა
                         });
+
                         // ლოკალურ საცავში შეინახება ავტორიზაციისას დაგენერირებული access ტოკენი
                         window.localStorage.setItem("token", login_data?.data?.token); // Bearer ტოკენი
                         window.localStorage.setItem("user_id", login_data?.data?.user?.id); // ავტორიზირებული მომხმარებლის აიდი
                         window.localStorage.setItem("logged_in", true); // ავტორიზაციის წარმატებით გავლის შემთხვევაში სტორიჯში ჩაიწერება true
+                        window.localStorage.setItem("role", login_data?.data?.user?.role_id); // შეინახება ავტორიზირებული მომხმარებლის როლი
+
+                        this.$store.dispatch("setRole"); // store-ში მოხდება ავტორიზირებული მომხმარებლის როლის აიდის შენახვა
 
                         this.$router.push("/user/info"); // მოხდება გადმაისამართება ავტორიზირებული იუზერის ინფორმაციის გვერდზე
                     }

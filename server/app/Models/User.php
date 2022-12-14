@@ -40,7 +40,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
+        "password", "role"
+    ];
+
+    // მოცემულ მასივში არის მოთავსებული ცხრილში ხელოვნურად ჩამატებული სვეტები
+    protected $appends = [
+        "role_name"
     ];
 
     // მოცემული მეთოდი პასუხისმგებელია ბაზაში დაბადების თარიღის ფორმატის სტილის ჩაწერაზე
@@ -53,5 +58,18 @@ class User extends Authenticatable
     // მიმდინარე მოდელის/ცხრილი დაკავშირება ხდება როლების მოდელთან/ცხრილთან
     public function role() {
         return $this->hasOne(Role::class, "id", "role_id"); // იუზერების მოდელს/ცხრილს აქვს როლების ცხრილიდან ერთი ჩანაწერი
+    }
+
+    // როლის აიდი წამოვა მთელ რიცხვის ტიპად
+    public function roleId() : Attribute {
+        return Attribute::make(
+            get : fn($value) => (int)$value
+        );
+    }
+
+    public function roleName() : Attribute {
+        return Attribute::make(
+            get : fn() => $this->role->role_name
+        );
     }
 }

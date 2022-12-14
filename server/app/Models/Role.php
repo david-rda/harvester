@@ -19,6 +19,11 @@ class Role extends Model
         "role_name",
     ];
 
+    // მოცემულ მასივში მოთავსებული სვეტების სახელები არ გამოჩნდება ბაზიდან წამოღებულ შედეგში
+    protected $hidden = [
+        "created_at", "updated_at"
+    ];
+
     public $timestamps = true;
 
     // მიმდინარე მოდელის/ცხრილი დაკავშირება ხდება user-ების მოდელთან

@@ -9,7 +9,7 @@
                         <tbody>
                             <tr>
                                 <td class="p-3">სტატუსი</td>
-                                <td class="p-3"><strong class="status">ბენეფიციარი</strong></td>
+                                <td class="p-3"><strong class="status">{{ this?.user_info?.role_name }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="p-3">დამატებული განცხადებები</td>
