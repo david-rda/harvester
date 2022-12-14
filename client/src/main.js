@@ -21,6 +21,4 @@ app.use(router);
 app.use(VueSweetalert2);
 app.use(store);
 
-console.log(store?.state?.token);
-
 app.mount("#app");
