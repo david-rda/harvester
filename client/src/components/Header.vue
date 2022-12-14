@@ -67,6 +67,8 @@
             
             const user = await axios.get("/user/get/" + Number.parseInt(id)); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
             this.user = user?.data?.name + " " + user?.data?.lastname;
+
+            this.$store.dispatch("setRole"); // ჰედერის ყოველი ჩატვირთვისას store-ში ჩაიწერება ავტორიზირებული მომხმარებლის როლის აიდი
         },
 
         methods : {

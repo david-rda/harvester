@@ -9,7 +9,7 @@ import router from "./routes/routes"; // პლიკაციაში გა�
 import store from "@/store/store";
 
 axios.defaults.baseURL = "http://localhost:8000/api/";
-axios.defaults.headers.common["Authorization"] = `Bearer ${window.localStorage.getItem("token")}`;
+axios.defaults.headers.common["Authorization"] = `Bearer ${store.state.token}`;
 
 const app = createApp(App);
 
@@ -20,5 +20,7 @@ app.component("BIconInfoLg", BIconInfoLg);
 app.use(router);
 app.use(VueSweetalert2);
 app.use(store);
+
+console.log(store?.state?.token);
 
 app.mount("#app");

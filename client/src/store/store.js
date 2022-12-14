@@ -2,7 +2,8 @@ import { createStore } from "vuex";
 
 let store = createStore({
     state : {
-        role : ""
+        role : "",
+        token : window.localStorage.getItem("token")
     },
 
     mutations : {

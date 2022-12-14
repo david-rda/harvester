@@ -27,18 +27,22 @@
                 </div>
             </div>
         </div>
+
+        <Footer />
     </div>
 </template>
 
 <script>
     import Header from "../components/Header.vue";
+    import Footer from "../components/Footer.vue";
     import axios, { AxiosError } from "axios";
   
     export default {
         name : "Profile",
 
         components : {
-            Header
+            Header,
+            Footer
         },
 
         data() {

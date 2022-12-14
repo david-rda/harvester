@@ -11,7 +11,7 @@
                 </div>
             </div>
 
-            <div>
+            <div v-if="this.role != 3">
                 <h3 class="mb-3 mt-5"><b>განსახილველი განაცხადები</b></h3>
 
                 <div class="row">
@@ -175,12 +175,16 @@
         data() {
             return {
                 show : false,
-                full_date_string : ""
+                full_date_string : "",
+                role : ""
             }
         },
 
         async mounted() {
             document.title = "განაცხადების სია";
+            this.$store.dispatch("setRole");
+
+            this.role = this.$store.state.role;
 
             const months = ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"];
 
