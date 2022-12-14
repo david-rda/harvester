@@ -27,7 +27,9 @@
         },
 
         mounted() {
-            
+            const logged_in = window.localStorage.getItem("logged_in");
+
+            if(logged_in) this.$router.push("/user/info");
         },
     }
 </script>
