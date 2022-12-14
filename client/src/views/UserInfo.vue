@@ -45,7 +45,7 @@
 
 <script>
     import Header from "../components/Header.vue";
-    import axios from "axios";
+    import axios, { AxiosError } from "axios";
 
     export default {
         name : "UserInfo",
@@ -65,8 +65,16 @@
 
             const id = window.localStorage.getItem("user_id");
 
-            const info = await axios.get("/user/get/" + Number.parseInt(id));
-            this.user_info = info?.data;
+            try {
+                const info = await axios.get("/user/get/" + Number.parseInt(id));
+                this.user_info = info?.data;
+            }catch(err) {
+                if(err instanceof AxiosError) {
+                    if(err?.response?.status == 401) {
+                        this.$router.push("/");
+                    }
+                }
+            }
         },
 
         methods : {
