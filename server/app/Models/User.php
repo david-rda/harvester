@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        "role_id",
         "name",
         "lastname",
         "birth_date",
@@ -28,7 +30,6 @@ class User extends Authenticatable
         "mobile_number",
         "email",
         "password",
-        //"status"
     ];
 
     protected $primaryKey = "id";
@@ -47,5 +48,10 @@ class User extends Authenticatable
         return Attribute::make(
             set : fn($value) => $this->birthDate = $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("d-m-Y")
         );
+    }
+
+    // მიმდინარე მოდელის/ცხრილი დაკავშირება ხდება როლების მოდელთან/ცხრილთან
+    public function role() {
+        return $this->hasOne(Role::class, "id", "role_id"); // იუზერების მოდელს/ცხრილს აქვს როლების ცხრილიდან ერთი ჩანაწერი
     }
 }
