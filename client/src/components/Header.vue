@@ -55,22 +55,27 @@
 
         data() {
             return {
-                user : ""
+                user : "" // ამ ცვლადში ინახება ავტორიზირებული მომხმარებლის სახელი და გვარი
             }
         },
 
         async mounted() {
-            const id = window.localStorage.getItem("user_id");
-            const user = await axios.get("/user/get/" + Number.parseInt(id));
+            const logged_in = window.localStorage.getItem("logged_in"); // სტორიჯიდან ლოგიკური მნიშვნელობის წამოღება არის თუ არა მომხმარებელი ავტორიზირებული
+            const id = window.localStorage.getItem("user_id"); // სტორიჯიდან ავტორიზირებული მომხმარებლის აიდის წამოღება
+            
+            if(!logged_in) this.$router.push("/"); // თუ მომხმარებელი არაა ავტორიზირებული არ მოხდება გვერდების ჩატვირთვა და გადამისამართდება ავტორიზაციის გვერდზე
+            
+            const user = await axios.get("/user/get/" + Number.parseInt(id)); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
             this.user = user?.data?.name + " " + user?.data?.lastname;
         },
 
         methods : {
+            // სისტემიდან გამოსვლის ფუნქცია
             async logout() {
                 try {
-                    await axios.post("/logout");
+                    await axios.post("/logout"); // გაიგზავნება მოთხოვნა logout მარსუტზე რათა მოხდეს სისტემიდან გამოსვლა
 
-                    window.localStorage.clear();
+                    window.localStorage.clear(); // სტორიჯის გასუფთავება შენახული ინფორმაცისგან
 
                     this.$router.push("/");
                 }catch(err) {

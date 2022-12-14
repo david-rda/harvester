@@ -98,10 +98,11 @@
                             password : this.password.trim() // პაროლის ველის მნიშვნელობა
                         });
                         // ლოკალურ საცავში შეინახება ავტორიზაციისას დაგენერირებული access ტოკენი
-                        window.localStorage.setItem("token", login_data?.data?.token);
-                        window.localStorage.setItem("user_id", login_data?.data?.user?.id);
+                        window.localStorage.setItem("token", login_data?.data?.token); // Bearer ტოკენი
+                        window.localStorage.setItem("user_id", login_data?.data?.user?.id); // ავტორიზირებული მომხმარებლის აიდი
+                        window.localStorage.setItem("logged_in", true); // ავტორიზაციის წარმატებით გავლის შემთხვევაში სტორიჯში ჩაიწერება true
 
-                        this.$router.push("/user/info");
+                        this.$router.push("/user/info"); // მოხდება გადმაისამართება ავტორიზირებული იუზერის ინფორმაციის გვერდზე
                     }
                 }catch(err) {
                     if(err instanceof AxiosError) {
