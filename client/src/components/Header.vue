@@ -48,7 +48,7 @@
 </template>
 
 <script>
-    import axios, { AxiosError } from "axios";
+    import axios from "axios";
 
     export default {
         name : "Header",
@@ -65,16 +65,8 @@
             
             if(!logged_in) this.$router.push("/"); // თუ მომხმარებელი არაა ავტორიზირებული არ მოხდება გვერდების ჩატვირთვა და გადამისამართდება ავტორიზაციის გვერდზე
             
-            try {
-                const user = await axios.get("/user/get/" + Number.parseInt(id)); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
-                this.user = user?.data?.name + " " + user?.data?.lastname;
-            }catch(err) {
-                if(err instanceof AxiosError) {
-                    if(err?.response?.status == 401) {
-                        this.$router.push("/");
-                    }
-                }
-            }
+            const user = await axios.get("/user/get/" + Number.parseInt(id)); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
+            this.user = user?.data?.name + " " + user?.data?.lastname;
         },
 
         methods : {
