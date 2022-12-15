@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function roleName() : Attribute {
         return Attribute::make(
-            get : fn() => $this->role->role_name
+            get : fn() => $this->role?->role_name
         );
     }
 }

@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                 <label class="mb-2">სტანდარტული ან სპეციალური თანადაფინანსების პირობა</label>
-                                <select type="text" class="form-select" v-model="special_co_finance">
+                                <select type="text" class="form-select" v-model="finance_condition">
                                     <option value="" disabled selected>აირჩიეთ</option>
                                     <option value="კომბაინი">კომბაინი</option>
                                     <option value="სხვა ტიპის მოსავლის ამღები ტექნიკა (გარდა ყურძნის)">სხვა ტიპის მოსავლის ამღები ტექნიკა (გარდა ყურძნის)</option>
@@ -275,11 +275,11 @@
                         <div class="row">
                             <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="finance" class="mb-2">საკუთარი სახსრები/დაფინანსების სხვა ფულადი წყარო</label>
-                                <input type="text" class="form-control" placeholder="0 GEL" name="finance" id="finance" v-model="finance" disabled>
+                                <input type="text" class="form-control" placeholder="0 GEL" name="finance" id="finance" disabled v-model="own_finance">
                             </div>
                             <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="agency_finance" class="mb-2">სააგენტოს დაფინანსება</label>
-                                <input type="text" class="form-control" placeholder="0 GEL" name="agency_finance" id="agency_finance" v-model="agency_finance" disabled>
+                                <input type="text" class="form-control" placeholder="0 GEL" name="agency_finance" id="agency_finance" disabled v-model="agency_finance">
                             </div>
                         </div>
 
@@ -307,8 +307,7 @@
 <script>
     import Header from "../components/Header.vue";
     import Footer from "../components/Footer.vue";
-    //import TechnicForm from "../components/TechnicForm.vue";
-    //import axios, { AxiosError } from "axios";
+    import axios, { AxiosError } from "axios";
     
     export default {
         name : "StatementAdd",
@@ -316,7 +315,6 @@
         components : {
             Header,
             Footer,
-            //TechnicForm
         },
 
         data() {
@@ -331,8 +329,11 @@
                 beneficiary_status : "", // ბენეფიციარის იურიდიული სტატუსი
                 address1 : "", // ბენეფიციარის ფაქტობრივი მისამართი
                 address2 : "", // ბენეფიციარის იურიდიული მისამართი
+                finance_condition : "", // თანადაფინანსების პირობები
                 agency_finance : "", // სააგენტოს თანადაფინანსება
-                finance : "", // ბენეფიციარის საკუთარი ფინანსები,
+                own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
+
+                beneficiary_data : new FormData(),
 
                 values : {}
             }
@@ -348,10 +349,44 @@
             },
 
             // განაცხადის დამატების ფუნქცია
-            add_statement() {
-                for(let data of Object.keys(this.values)) {
+            async add_statement() {
+                /*for(let data of Object.keys(this.values)) {
                     console.log(data);
                     console.log(this.values);
+                }*/
+
+                try {
+                    this.beneficiary_data.append("beneficiary_name", this.name);
+                    this.beneficiary_data.append("beneficiary_lastname", this.lastname);
+                    this.beneficiary_data.append("beneficiary_phone", this.phone);
+                    this.beneficiary_data.append("beneficiary_additional_phone", this.additional_phone);
+                    this.beneficiary_data.append("beneficiary_email", this.email);
+                    this.beneficiary_data.append("beneficiary_juridical_status", this.beneficiary_status);
+                    this.beneficiary_data.append("beneficiary_address1", this.address1);
+                    this.beneficiary_data.append("beneficiary_address2", this.address2);
+                    this.beneficiary_data.append("finance_condition", this.finance_condition);
+                    this.beneficiary_data.append("own_finance", this.own_finance);
+                    this.beneficiary_data.append("agency_finance", this.agency_finance);
+
+                    console.log(this.beneficiary_data.getAll());
+
+                    await axios.post("/statement/add", {
+                        beneficiary_name : this.beneficiary_data.get("beneficiary_name"),
+                        beneficiary_lastname : this.beneficiary_data.get("beneficiary_lastname"),
+                        beneficiary_phone : this.beneficiary_data.get("beneficiary_phone"),
+                        beneficiary_additional_phone : this.beneficiary_data.get("beneficiary_additional_phone"),
+                        beneficiary_email : this.beneficiary_data.get("beneficiary_email"),
+                        beneficiary_juridical_status : this.beneficiary_data.get("beneficiary_juridical_status"),
+                        beneficiary_address1 : this.beneficiary_data.get("beneficiary_address1"),
+                        beneficiary_address2 : this.beneficiary_data.get("beneficiary_address2"),
+                        finance_condition : this.beneficiary_data.get("finance_condition"),
+                        own_finance : this.beneficiary_data.get("own_finance"),
+                        agency_finance : this.beneficiary_data.get("agency_finance")
+                    });
+                }catch(err) {
+                    if(err instanceof AxiosError) {
+                        return false;
+                    }
                 }
             },
 
