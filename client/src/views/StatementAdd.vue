@@ -80,55 +80,55 @@
                                 <div class="row">
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">მოსავლის ამღები ტექნიკის დასახელება</label>
-                                        <input type="text" class="form-control" placeholder="დასახელება" v-model="values['technic_name' + key]">
+                                        <input type="text" class="form-control" placeholder="დასახელება" v-model="values['technic_name_' + key]">
                                     </div>
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">მოდელი</label>
-                                        <input type="text" class="form-control" placeholder="მოდელი" v-model="values['technic_model' + key]">
+                                        <input type="text" class="form-control" placeholder="მოდელი" v-model="values['technic_model_' + key]">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ძრავის სიმზლავრე (ცხ/ძ - მხოლოდ ძრავიანი ტექნიკის შემთხვევაში)</label>
-                                        <input type="text" class="form-control" placeholder="ძრავის სიმძლავრე (ცხ/ძ)" v-model="technic_engine">
+                                        <input type="text" class="form-control" placeholder="ძრავის სიმძლავრე (ცხ/ძ)" v-model="values['technic_engine_' + key]">
                                     </div>
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის გამოშვების თარიღი <span class="text-danger">(არაუმეტეს 2 წლის)</span></label>
-                                        <input type="date" class="form-control" placeholder="თარიღი" v-model="technic_issue_date">
+                                        <input type="date" class="form-control" placeholder="თარიღი" v-model="values['technic_issue_date_' + key]">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მწარმოებელი ქვეყანა</label>
-                                        <input type="text" class="form-control" placeholder="ქვეყანა" v-model="technic_manufacturer_country">
+                                        <input type="text" class="form-control" placeholder="ქვეყანა" v-model="values['technic_manufacturer_country_' + key]">
                                     </div>
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის დანიშნულება (რისთვის გამოიყენება)</label>
-                                        <input type="text" class="form-control" placeholder="დანიშნულება" v-model="technic_use_to">
+                                        <input type="text" class="form-control" placeholder="დანიშნულება" v-model="values['technic_use_to_' + key]">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მომწოდებელი კომპანიის დასახელება</label>
-                                        <input type="text" class="form-control" placeholder="კომპანია" v-model="technic_supplier_company">
+                                        <input type="text" class="form-control" placeholder="კომპანია" v-model="values['technic_supplier_company_' + key]">
                                     </div>
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მომწოდებელი კომპანიის საიდენტიფიკაციო ნომერი</label>
-                                        <input type="text" class="form-control" placeholder="ს/კ" v-model="company_id">
+                                        <input type="text" class="form-control" placeholder="ს/კ" v-model="values['company_id_' + key]">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">1 ერთეული ტექნიკის ღირებულება</label>
-                                        <input type="text" class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="price_of_technic">
+                                        <input type="text" class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="values['price_of_technic_' + key]">
                                     </div>
                                     <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input type="number" class="form-control" v-model="number_of_technic" min="0">
+                                        <input type="number" class="form-control" v-model="values['number_of_technic_' + key]" min="0">
                                     </div>
                                 </div>
                             </div>
@@ -340,7 +340,7 @@
                 finance_condition : "", // თანადაფინანსების პირობები
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
-                values : {}
+                values : {}, // მოცემულ მნიშვნელობებში ინახება
             }
         },
 
@@ -353,13 +353,12 @@
                 this.count++;
             },
 
+            removeForm() {
+                this.count--;
+            },
+
             // განაცხადის დამატების ფუნქცია
             async add_statement() {
-                /*for(let data of Object.keys(this.values)) {
-                    console.log(data);
-                    console.log(this.values);
-                }*/
-
                 try {
                     const formData = new FormData(); // მოცემულ ობიექტში შეინახება ფორმიდან შეყვანილი მონაცემები(ბენეფიციარის)
                     formData.append("beneficiary_name", this.name);
@@ -374,16 +373,25 @@
                     formData.append("own_finance", this.own_finance);
                     formData.append("agency_finance", this.agency_finance);
 
+                    for(let i = 1; i <= Object.keys(this.values).length; i++) {
+                        formData.append("names[]", this.values?.['technic_name_' + i]);
+                        formData.append("models[]", this.values?.['technic_model_' + i]);
+                        formData.append("engines[]", this.values?.['technic_engine_' + i]);
+                        formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]);
+                        formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]);
+                        formData.append("use_fors[]", this.values?.['technic_use_to_' + i]);
+                        formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]);
+                        formData.append("company_ids[]", this.values?.['company_id_' + i]);
+                        formData.append("prices[]", this.values?.['price_of_technic_' + i]);
+                        formData.append("quantities[]", this.values?.['number_of_technic_' + i]);
+                    }
+
                     await axios.post("/statement/add", formData);
                 }catch(err) {
                     if(err instanceof AxiosError) {
                         this.statement_errors = err?.response?.data?.errors;
                     }
                 }
-            },
-
-            removeForm() {
-                this.count--;
             },
 
             openPid() {
