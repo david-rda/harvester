@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Technic;
 
 class Statement extends Model
 {
@@ -33,4 +34,9 @@ class Statement extends Model
     ];
 
     public $timestamps = true;
+
+    // კავშირის დამყარება ტექნიკის ცხრილთან
+    public function technic() {
+        return $this->hasMany(Technic::class, "statement_id", "id");
+    }
 }
