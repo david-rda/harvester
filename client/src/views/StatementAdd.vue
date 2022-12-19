@@ -361,29 +361,30 @@
             async add_statement() {
                 try {
                     const formData = new FormData(); // მოცემულ ობიექტში შეინახება ფორმიდან შეყვანილი მონაცემები(ბენეფიციარის)
-                    formData.append("beneficiary_name", this.name);
-                    formData.append("beneficiary_lastname", this.lastname);
-                    formData.append("beneficiary_phone", this.phone);
-                    formData.append("beneficiary_additional_phone", this.additional_phone);
-                    formData.append("beneficiary_email", this.email);
-                    formData.append("beneficiary_juridical_status", this.beneficiary_status);
-                    formData.append("beneficiary_address1", this.address1);
-                    formData.append("beneficiary_address2", this.address2);
-                    formData.append("finance_condition", this.finance_condition);
-                    formData.append("own_finance", this.own_finance);
-                    formData.append("agency_finance", this.agency_finance);
+
+                    formData.append("beneficiary_name", this.name); // ბენეფიციარის სახელი
+                    formData.append("beneficiary_lastname", this.lastname); // ბენეფიციარის გვარი
+                    formData.append("beneficiary_phone", this.phone); // ბენეფიციარის მობილური
+                    formData.append("beneficiary_additional_phone", this.additional_phone); // ბენეფიციარის დამატებითი მობილური
+                    formData.append("beneficiary_email", this.email); // ბენეფიციარის ელ. ფოსტა
+                    formData.append("beneficiary_juridical_status", this.beneficiary_status); // ბენეფიციარის იურიდიული სტატუსი
+                    formData.append("beneficiary_address1", this.address1); // ბენეფიციარის ფაქტობრივი მისამართი
+                    formData.append("beneficiary_address2", this.address2); // ბენეფიციარის იურიდიული მისამართი
+                    formData.append("finance_condition", this.finance_condition); // ბენეფიციარის თანადაფინანსების პირობა
+                    formData.append("own_finance", this.own_finance); // საკუთარი ფინანსები
+                    formData.append("agency_finance", this.agency_finance); // სააგენტოს ფინანსები
 
                     for(let i = 1; i <= Object.keys(this.values).length; i++) {
-                        formData.append("names[]", this.values?.['technic_name_' + i]);
-                        formData.append("models[]", this.values?.['technic_model_' + i]);
-                        formData.append("engines[]", this.values?.['technic_engine_' + i]);
-                        formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]);
-                        formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]);
-                        formData.append("use_fors[]", this.values?.['technic_use_to_' + i]);
-                        formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]);
-                        formData.append("company_ids[]", this.values?.['company_id_' + i]);
-                        formData.append("prices[]", this.values?.['price_of_technic_' + i]);
-                        formData.append("quantities[]", this.values?.['number_of_technic_' + i]);
+                        formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
+                        formData.append("models[]", this.values?.['technic_model_' + i]); // ტექნიკის მოდელი
+                        formData.append("engines[]", this.values?.['technic_engine_' + i]); // ტექნიკის ძრავის სიმძლავრე
+                        formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]); // ტექნიკის გამოშვების თარიღი
+                        formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]); // ტექნიკის მწარმოებელი ქვეყანა
+                        formData.append("use_fors[]", this.values?.['technic_use_to_' + i]); // ტექნიკის დანიშნულება
+                        formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]); // მომწოდებელი კომპანია
+                        formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
+                        formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
+                        formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                     }
 
                     await axios.post("/statement/add", formData);
