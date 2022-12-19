@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string("beneficiary_address1");
             $table->string("beneficiary_address2");
             $table->string("finance_condition");
-            $table->string("own_finance");
-            $table->string("agency_finance");
+            $table->string("own_finance")->nullable()->default(0);
+            $table->string("agency_finance")->nullable()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -105,6 +105,7 @@
                         window.localStorage.setItem("role", login_data?.data?.user?.role_id); // შეინახება ავტორიზირებული მომხმარებლის როლი
 
                         this.$store.dispatch("setRole"); // store-ში მოხდება ავტორიზირებული მომხმარებლის როლის აიდის შენახვა
+                        this.$store.dispatch("setToken"); // სტორიში შეინახება ბეარერ ტოკენი
 
                         this.$router.push("/user/info"); // მოხდება გადმაისამართება ავტორიზირებული იუზერის ინფორმაციის გვერდზე
                     }

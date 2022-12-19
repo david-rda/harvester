@@ -296,6 +296,13 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="row">
+                        <div class="alert alert-danger alert-dismissible fade show" v-for="(item, index) in statement_errors" :key="index">
+                            <strong>{{ item[0] }}</strong>
+                            <a href="javascript:void(0)" class="btn-close" data-bs-dismiss="alert"></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -320,6 +327,7 @@
         data() {
             return {
                 count : 1,
+                statement_errors : "", // აქ შეინახება ვალიდაციისას დაბრუნებული შეცდომის შეტყობინებები
 
                 name : "", // ბენეფიციარის სახელი
                 lastname : "", // ბენეფიციარის გვარი
@@ -332,9 +340,6 @@
                 finance_condition : "", // თანადაფინანსების პირობები
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
-
-                beneficiary_data : new FormData(),
-
                 values : {}
             }
         },
@@ -356,36 +361,23 @@
                 }*/
 
                 try {
-                    this.beneficiary_data.append("beneficiary_name", this.name);
-                    this.beneficiary_data.append("beneficiary_lastname", this.lastname);
-                    this.beneficiary_data.append("beneficiary_phone", this.phone);
-                    this.beneficiary_data.append("beneficiary_additional_phone", this.additional_phone);
-                    this.beneficiary_data.append("beneficiary_email", this.email);
-                    this.beneficiary_data.append("beneficiary_juridical_status", this.beneficiary_status);
-                    this.beneficiary_data.append("beneficiary_address1", this.address1);
-                    this.beneficiary_data.append("beneficiary_address2", this.address2);
-                    this.beneficiary_data.append("finance_condition", this.finance_condition);
-                    this.beneficiary_data.append("own_finance", this.own_finance);
-                    this.beneficiary_data.append("agency_finance", this.agency_finance);
+                    const formData = new FormData(); // მოცემულ ობიექტში შეინახება ფორმიდან შეყვანილი მონაცემები(ბენეფიციარის)
+                    formData.append("beneficiary_name", this.name);
+                    formData.append("beneficiary_lastname", this.lastname);
+                    formData.append("beneficiary_phone", this.phone);
+                    formData.append("beneficiary_additional_phone", this.additional_phone);
+                    formData.append("beneficiary_email", this.email);
+                    formData.append("beneficiary_juridical_status", this.beneficiary_status);
+                    formData.append("beneficiary_address1", this.address1);
+                    formData.append("beneficiary_address2", this.address2);
+                    formData.append("finance_condition", this.finance_condition);
+                    formData.append("own_finance", this.own_finance);
+                    formData.append("agency_finance", this.agency_finance);
 
-                    console.log(this.beneficiary_data.getAll());
-
-                    await axios.post("/statement/add", {
-                        beneficiary_name : this.beneficiary_data.get("beneficiary_name"),
-                        beneficiary_lastname : this.beneficiary_data.get("beneficiary_lastname"),
-                        beneficiary_phone : this.beneficiary_data.get("beneficiary_phone"),
-                        beneficiary_additional_phone : this.beneficiary_data.get("beneficiary_additional_phone"),
-                        beneficiary_email : this.beneficiary_data.get("beneficiary_email"),
-                        beneficiary_juridical_status : this.beneficiary_data.get("beneficiary_juridical_status"),
-                        beneficiary_address1 : this.beneficiary_data.get("beneficiary_address1"),
-                        beneficiary_address2 : this.beneficiary_data.get("beneficiary_address2"),
-                        finance_condition : this.beneficiary_data.get("finance_condition"),
-                        own_finance : this.beneficiary_data.get("own_finance"),
-                        agency_finance : this.beneficiary_data.get("agency_finance")
-                    });
+                    await axios.post("/statement/add", formData);
                 }catch(err) {
                     if(err instanceof AxiosError) {
-                        return false;
+                        this.statement_errors = err?.response?.data?.errors;
                     }
                 }
             },

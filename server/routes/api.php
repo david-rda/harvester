@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\PasswordController;
+use App\Http\Controllers\Api\StatementController;
 
 Route::post("/login", [AuthController::class, "Login"]); // ავტორიზაციის მარშუტი
 Route::post("/register", [UserController::class, "Register"]); // რეგისტრაციის მარშუტი
@@ -20,6 +21,10 @@ Route::group(["prefix" => "user", "middleware" => "auth:api"], function() {
 
 Route::group(["prefix" => "password", "middleware" => "auth:api"], function() {
     Route::put("/change", [PasswordController::class, "ChangePassword"]);
+});
+
+Route::group(["prefix" => "statement", "middleware" => "auth:api"], function() {
+    Route::post("/add", [StatementController::class, "CreateStatement"]);
 });
 
 ?>

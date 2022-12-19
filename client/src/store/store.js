@@ -9,12 +9,20 @@ let store = createStore({
     mutations : {
         role(state) {
             state.role = window.localStorage.getItem("role");
+        },
+
+        token(state) {
+            state.token = window.localStorage.getItem("token");
         }
     },
 
     actions : {
         setRole(context) {
             context.commit("role");
+        },
+
+        setToken(context) {
+            context.commit("token");
         }
     }
 });
