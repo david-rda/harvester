@@ -6,5 +6,7 @@
 
     interface IStatement {
         public function CreateStatement(StatementRequest $request); // განაცხადის შენახვის მეთოდი
+
+        public function StatementList(); // განაცხადების გამოტანის მეტოდი
     }
 ?>

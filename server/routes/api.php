@@ -25,6 +25,8 @@ Route::group(["prefix" => "password", "middleware" => "auth:api"], function() {
 
 Route::group(["prefix" => "statement", "middleware" => "auth:api"], function() {
     Route::post("/add", [StatementController::class, "CreateStatement"]);
+
+    Route::get("/list", [StatementController::class, "StatementList"]);
 });
 
 ?>

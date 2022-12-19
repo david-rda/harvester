@@ -52,4 +52,14 @@ class StatementController extends Controller implements IStatement
             ], 422);
         }
     }
+
+    /**
+     * განაცხადების გამოტანის მეტოდი
+     * @method GET
+     * @param null
+     * @return json
+     */
+    public function StatementList() {
+        return Statement::all();
+    }
 }
