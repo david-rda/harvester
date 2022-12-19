@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="row">
-                            <p>სულ <big><b>0 GEL</b></big></p>
+                            <p>სულ <big><b ref="total">0 GEL</b></big></p>
                         </div>
 
                         <h6 class="col-md-4 mt-4">წარმოსადგენი დოკუმენტაციის ნუსხა</h6>
