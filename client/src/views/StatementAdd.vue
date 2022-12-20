@@ -424,7 +424,11 @@
                             formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                         }
 
-                        await axios.post("/statement/add", formData);
+                        await axios.post("/statement/add", formData, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
+                        });
                     }catch(err) {
                         if(err instanceof AxiosError) {
                             console.log(err?.response?.data?.errors);

@@ -7,7 +7,7 @@
             <form method="POST" @submit.prevent="login()">
                 <div class="mb-3">
                     <label for="email" class="mb-1">ელ.&nbsp;ფოსტა</label>
-                    <input type="text" v-model.trim="email" name="email" id="email" autocomplete="off" class="login_email">
+                    <input type="text" v-model.trim="email" name="email" id="email" class="login_email">
                 </div>
                 <div class="mb-3 password-block">
                     <label for="password" class="mb-1">პაროლი</label>
@@ -51,6 +51,8 @@
         },
 
         mounted() {
+            this.$store.dispatch("setToken");
+            
             document.title = "სისტემაში შესვლა";
 
             var date = new Date();
@@ -96,6 +98,10 @@
                         const login_data = await axios.post("/login", {
                             email : this.email.trim(), // ელ.ფოსტის ველის მნიშვნელობა
                             password : this.password.trim() // პაროლის ველის მნიშვნელობა
+                        }, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
                         });
 
                         // ლოკალურ საცავში შეინახება ავტორიზაციისას დაგენერირებული access ტოკენი

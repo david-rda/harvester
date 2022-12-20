@@ -65,11 +65,16 @@
         },
 
         async mounted() {
+            this.$store.dispatch("setToken");
             document.title = "ინფორმაცია";
 
             const id = window.localStorage.getItem("user_id");
 
-            const info = await axios.get("/user/get/" + Number.parseInt(id));
+            const info = await axios.get("/user/get/" + Number.parseInt(id), {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            });
             this.user_info = info?.data;
         },
 

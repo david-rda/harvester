@@ -71,7 +71,11 @@
             
             if(!logged_in) this.$router.push("/"); // თუ მომხმარებელი არაა ავტორიზირებული არ მოხდება გვერდების ჩატვირთვა და გადამისამართდება ავტორიზაციის გვერდზე
             
-            const user = await axios.get("/user/get/" + Number.parseInt(id)); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
+            const user = await axios.get("/user/get/" + Number.parseInt(id), {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            }); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
             this.user = user?.data?.name + " " + user?.data?.lastname;
 
             this.$store.dispatch("setRole"); // ჰედერის ყოველი ჩატვირთვისას store-ში ჩაიწერება ავტორიზირებული მომხმარებლის როლის აიდი
@@ -82,7 +86,11 @@
             // სისტემიდან გამოსვლის ფუნქცია
             async logout() {
                 try {
-                    await axios.post("/logout"); // გაიგზავნება მოთხოვნა logout მარსუტზე რათა მოხდეს სისტემიდან გამოსვლა
+                    await axios.post("/logout", {}, {
+                        headers : {
+                            "Authorization" : `Bearer ${this.$store.state.token}`
+                        }
+                    }); // გაიგზავნება მოთხოვნა logout მარსუტზე რათა მოხდეს სისტემიდან გამოსვლა
 
                     window.localStorage.clear(); // სტორიჯის გასუფთავება შენახული ინფორმაცისგან
 

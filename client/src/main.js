@@ -9,7 +9,6 @@ import router from "./routes/routes"; // პლიკაციაში გა�
 import store from "@/store/store";
 
 axios.defaults.baseURL = "http://localhost:8000/api/";
-axios.defaults.headers.common["Authorization"] = `Bearer ${store.state.token}`;
 
 const app = createApp(App);
 

@@ -197,7 +197,12 @@
             this.full_date_string = `${day} ${month}, ${year} წელი`; // სრული თარიღი
 
             try {
-                const statements = await axios.get("/statement/list");
+                const statements = await axios.get("/statement/list", {
+                    headers : {
+                        "Authorization" : `Bearer ${this.$store.state.token}`
+                    }
+                });
+                
                 console.log(statements?.data);
                 this.show = true;
             }catch(err) {

@@ -59,7 +59,11 @@
 
             const id = window.localStorage.getItem("user_id");
 
-            const info = await axios.get("/user/get/" + Number.parseInt(id));
+            const info = await axios.get("/user/get/" + Number.parseInt(id), {
+                headers : {
+                    "Authorization" : `Bearer ${this.$store.state.token}`
+                }
+            });
             
             this.firstname = info?.data?.name;
             this.lastname = info?.data?.lastname;
@@ -137,6 +141,10 @@
                                 lastname : this.lastname,
                                 birth_date : this.bd,
                                 mobile_number : this.phone,
+                            }, {
+                                headers : {
+                                    "Authorization" : `Bearer ${this.$store.state.token}`
+                                }
                             });
                             this.$swal({
                                 title : "ინფორმაცია დარედაქტირდა",

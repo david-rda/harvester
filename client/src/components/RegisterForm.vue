@@ -226,6 +226,10 @@
                             email : this.email,
                             password : this.password,
                             confirm_password : this.confirm_password
+                        }, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
                         });
                     }
                 }catch(err) {

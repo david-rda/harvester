@@ -87,7 +87,11 @@
                             position : "top-end"
                         });
                     }else {
-                        const recovery = await axios.post("/password/recovery");
+                        const recovery = await axios.post("/password/recovery", {}, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
+                        });
                         console.log(recovery?.data);
                     }
                 }catch(err) {

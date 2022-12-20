@@ -101,6 +101,10 @@
                             current_password : this.current_password,
                             new_password : this.new_password,
                             confirm_password : this.confirm_password
+                        }, {
+                            headers : {
+                                "Authorization" : `Bearer ${this.$store.state.token}`
+                            }
                         });
 
                         this.$swal({
