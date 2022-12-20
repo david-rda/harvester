@@ -5,130 +5,149 @@
         <div class="container mt-5 bg-white p-4">
             <div class="row">
                 <div class="card p-4 col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                    <form method="POST" @submit.prevent="add_statement()">
+                    <form method="POST" @submit.prevent="add_statement()" :class="(this.submited) ? 'was-validated' : ''" novalidate>
                         <h6 class="col-md-4">ზოგადი ინფორმაცია განმცხადებელზე</h6>
 
                         <div class="row">
-                            <div class="mt-4 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-4 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="name" class="mb-2">განმცხადებლის სახელი</label>
-                                <input type="text" class="form-control" placeholder="სახელი" name="name" id="name" v-model="name">
+                                <input type="text" class="form-control" placeholder="სახელი" name="name" id="name" v-model="name" required>
+                                <span class="invalid-tooltip">შეიყვანეთ სახელი</span>
                             </div>
-                            <div class="mt-4 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-4 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="lastname" class="mb-2">განმცხადებლის გვარი</label>
-                                <input type="text" class="form-control" placeholder="გვარი" name="lastname" id="lastname" v-model="lastname">
+                                <input type="text" class="form-control" placeholder="გვარი" name="lastname" id="lastname" v-model="lastname" required>
+                                <span class="invalid-tooltip">შეიყვანეთ გვარი</span>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="phone" class="mb-2">მობილური ტელეფონის ნომერი</label>
-                                <input type="text" class="form-control" placeholder="ნომერი" name="phone" id="phone" v-model="phone">
+                                <input type="text" required class="form-control" placeholder="ნომერი" name="phone" id="phone" v-model="phone" maxlength="9">
+                                <span class="invalid-tooltip">შეიყვანეთ მობილური ტელეფონის ნომერი</span>
                             </div>
-                            <div class="mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="additional_phone" class="mb-2">დამატებითი ტელეფონის ნომერი</label>
-                                <input type="text" class="form-control" placeholder="ნომერი" name="additional_phone" id="additional_phone" v-model="additional_phone">
+                                <input type="text" required class="form-control" placeholder="ნომერი" name="additional_phone" id="additional_phone" v-model="additional_phone" maxlength="9">
+                                <span class="invalid-tooltip">შეიყვანეთ დამატებითი ტელეფონის ნომერი</span>
                             </div>
                         </div>
 
                         <div class="row mb-4">
-                            <div class="mt-3 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                 <label for="email" class="mb-2">ელ. ფოსტა</label>
-                                <input type="text" class="form-control" placeholder="ელ. ფოსტა" name="email" id="email" v-model="email">
+                                <input type="text" required class="form-control" placeholder="ელ. ფოსტა" name="email" id="email" v-model="email">
+                                <span class="invalid-tooltip">შეიყვანეთ ელ. ფოსტა</span>
                             </div>
                         </div>
 
                         <h6 class="col-md-5">ზოგადი ინფორმაცია პოტენციურ ბენეფიციარზე</h6>
 
                         <div class="row">
-                            <div class="mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                 <label class="mb-2">ბენეფიციარის იურიდიული სტატუსი</label>
-                                <select type="text" class="form-select" v-model="beneficiary_status">
+                                <select type="text" class="form-select" v-model="beneficiary_status" required>
                                     <option value="" disabled selected>აირჩიეთ</option>
                                     <option value="ინდ. მეწარმე">ინდ. მეწარმე</option>
                                     <option value="იურიდიული პირი">იურიდიული პირი</option>
                                     <option value="ფიზიკური პირი">ფიზიკური პირი</option>
                                 </select>
+                                <span class="invalid-tooltip">აირCიეთ ბენეფიციარის იურიდიული სტატუსი</span>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="address1" class="mb-2">ფაქტობრივი მისამართი</label>
-                                <input type="text" class="form-control" placeholder="მისამართი" name="address1" id="address1" v-model="address1">
+                                <input type="text" required class="form-control" placeholder="მისამართი" name="address1" id="address1" v-model="address1">
+                                <span class="invalid-tooltip">შეიყვანეთ ფაქტობრივი მისამართი</span>
                             </div>
-                            <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="address2" class="mb-2">იურიდიული მისამართი</label>
-                                <input type="text" class="form-control" placeholder="მისამართი" name="address2" id="address2" v-model="address2">
+                                <input type="text" required class="form-control" placeholder="მისამართი" name="address2" id="address2" v-model="address2">
+                                <span class="invalid-tooltip">შეიყვანეთ იურიდიული მისამართი</span>
                             </div>
                         </div>
 
                         <h6 class="col-md-5 mt-4">თანადაფინანსების განაცხადის მიზნობრიობა</h6>
 
                         <div class="row">
-                            <div class="mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="has-validation position-relative mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                 <label class="mb-2">სტანდარტული ან სპეციალური თანადაფინანსების პირობა</label>
-                                <select type="text" class="form-select" v-model="finance_condition">
+                                <select type="text" class="form-select" v-model="finance_condition" required>
                                     <option value="" disabled selected>აირჩიეთ</option>
                                     <option value="კომბაინი">კომბაინი</option>
                                     <option value="სხვა ტიპის მოსავლის ამღები ტექნიკა (გარდა ყურძნის)">სხვა ტიპის მოსავლის ამღები ტექნიკა (გარდა ყურძნის)</option>
                                 </select>
+                                <span class="invalid-tooltip">აირჩიეთ სტანდარტული ან სპეციალური თანადაფინანსების პირობა</span>
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <div class="container-fluid mt-3 p-3" v-for="key in count" :key="key">
                                 <div class="row">
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">მოსავლის ამღები ტექნიკის დასახელება</label>
-                                        <input type="text" class="form-control" placeholder="დასახელება" v-model="values['technic_name_' + key]">
+                                        <input type="text" required class="form-control" placeholder="დასახელება" v-model="values['technic_name_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ მოსავლის ამღები ტექნიკის დასახელება</span>
                                     </div>
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">მოდელი</label>
-                                        <input type="text" class="form-control" placeholder="მოდელი" v-model="values['technic_model_' + key]">
+                                        <input type="text" required class="form-control" placeholder="მოდელი" v-model="values['technic_model_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ მოდელი</span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ძრავის სიმზლავრე (ცხ/ძ - მხოლოდ ძრავიანი ტექნიკის შემთხვევაში)</label>
-                                        <input type="text" class="form-control" placeholder="ძრავის სიმძლავრე (ცხ/ძ)" v-model="values['technic_engine_' + key]">
+                                        <input type="text" required class="form-control" placeholder="ძრავის სიმძლავრე (ცხ/ძ)" v-model="values['technic_engine_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ ძრავის სიმძლავრე</span>
                                     </div>
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის გამოშვების თარიღი <span class="text-danger">(არაუმეტეს 2 წლის)</span></label>
-                                        <input type="date" class="form-control" placeholder="თარიღი" v-model="values['technic_issue_date_' + key]">
+                                        <input type="date" required class="form-control" placeholder="თარიღი" v-model="values['technic_issue_date_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ გამოშვების თარიღია</span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მწარმოებელი ქვეყანა</label>
-                                        <input type="text" class="form-control" placeholder="ქვეყანა" v-model="values['technic_manufacturer_country_' + key]">
+                                        <input type="text" required class="form-control" placeholder="ქვეყანა" v-model="values['technic_manufacturer_country_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ მწარმოებელი ქვეყანაა</span>
                                     </div>
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის დანიშნულება (რისთვის გამოიყენება)</label>
-                                        <input type="text" class="form-control" placeholder="დანიშნულება" v-model="values['technic_use_to_' + key]">
+                                        <input type="text" required class="form-control" placeholder="დანიშნულება" v-model="values['technic_use_to_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ ტექნიკის დანიშნულება</span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მომწოდებელი კომპანიის დასახელება</label>
-                                        <input type="text" class="form-control" placeholder="კომპანია" v-model="values['technic_supplier_company_' + key]">
+                                        <input type="text" required class="form-control" placeholder="კომპანია" v-model="values['technic_supplier_company_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ ტექნიკის მომწოდებელი კომპანიის დასახელება</span>
                                     </div>
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">ტექნიკის მომწოდებელი კომპანიის საიდენტიფიკაციო ნომერი</label>
-                                        <input type="text" class="form-control" placeholder="ს/კ" v-model="values['company_id_' + key]">
+                                        <input type="text" required class="form-control" placeholder="ს/კ" v-model="values['company_id_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ ტექნიკის მომწოდებელი კომპანიის საიდენტიფიკაციო ნომერი</span>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">1 ერთეული ტექნიკის ღირებულება</label>
-                                        <input type="text" class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="values['price_of_technic_' + key]">
+                                        <input type="text" required class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="values['price_of_technic_' + key]">
+                                        <span class="invalid-tooltip">შეიყვანეთ 1 ერთეული ტექნიკის ღირებულება</span>
                                     </div>
-                                    <div class="mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                                    <div class="has-validation position-relative mb3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input type="number" class="form-control" v-model="values['number_of_technic_' + key]" min="0">
+                                        <input type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="0">
+                                        <span class="invalid-tooltip">შეიყვანეთ რაოდენობა</span>
                                     </div>
                                 </div>
                             </div>
@@ -295,14 +314,14 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
 
-                    <div class="row">
-                        <div class="alert alert-danger alert-dismissible fade show" v-for="(item, index) in statement_errors" :key="index">
-                            <strong>{{ item[0] }}</strong>
-                            <a href="javascript:void(0)" class="btn-close" data-bs-dismiss="alert"></a>
+                        <div class="row" v-if="showError">
+                            <div class="alert alert-dismissible alert-danger fade show">
+                                <a href="javascript:void" class="btn-close" data-bs-dismiss="alert"></a>
+                                <strong>განაცხადი ვერ გაიგზავნა. გთხოვთ გადაამოწმოთ მონაცემები</strong>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -340,7 +359,7 @@
         data() {
             return {
                 count : 1,
-                statement_errors : "", // აქ შეინახება ვალიდაციისას დაბრუნებული შეცდომის შეტყობინებები
+                showError : false,
 
                 name : "", // ბენეფიციარის სახელი
                 lastname : "", // ბენეფიციარის გვარი
@@ -354,6 +373,9 @@
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
                 values : {}, // მოცემულ მნიშვნელობებში ინახება
+
+                // ========================================================= //
+                submited : false
             }
         },
 
@@ -372,6 +394,8 @@
 
             // განაცხადის დამატების ფუნქცია
             async add_statement() {
+                this.submited = true;
+
                 try {
                     const formData = new FormData(); // მოცემულ ობიექტში შეინახება ფორმიდან შეყვანილი მონაცემები(ბენეფიციარის)
 
@@ -387,25 +411,26 @@
                     formData.append("own_finance", this.own_finance); // საკუთარი ფინანსები
                     formData.append("agency_finance", this.agency_finance); // სააგენტოს ფინანსები
 
-                    for(let i = 1; i <= Object.keys(this.values).length; i++) {
-                        formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
-                        formData.append("models[]", this.values?.['technic_model_' + i]); // ტექნიკის მოდელი
-                        formData.append("engines[]", this.values?.['technic_engine_' + i]); // ტექნიკის ძრავის სიმძლავრე
-                        formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]); // ტექნიკის გამოშვების თარიღი
-                        formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]); // ტექნიკის მწარმოებელი ქვეყანა
-                        formData.append("use_fors[]", this.values?.['technic_use_to_' + i]); // ტექნიკის დანიშნულება
-                        formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]); // მომწოდებელი კომპანია
-                        formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
-                        formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
-                        formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
-                    }
+                        for(let i = 1; i <= Object.keys(this.values).length; i++) {
+                            formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
+                            formData.append("models[]", this.values?.['technic_model_' + i]); // ტექნიკის მოდელი
+                            formData.append("engines[]", this.values?.['technic_engine_' + i]); // ტექნიკის ძრავის სიმძლავრე
+                            formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]); // ტექნიკის გამოშვების თარიღი
+                            formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]); // ტექნიკის მწარმოებელი ქვეყანა
+                            formData.append("use_fors[]", this.values?.['technic_use_to_' + i]); // ტექნიკის დანიშნულება
+                            formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]); // მომწოდებელი კომპანია
+                            formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
+                            formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
+                            formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
+                        }
 
-                    await axios.post("/statement/add", formData);
-                }catch(err) {
-                    if(err instanceof AxiosError) {
-                        this.statement_errors = err?.response?.data?.errors;
+                        await axios.post("/statement/add", formData);
+                    }catch(err) {
+                        if(err instanceof AxiosError) {
+                            console.log(err?.response?.data?.errors);
+                            this.showError = true;
+                        }
                     }
-                }
             },
 
             // ფაილების ატვირთვისთვის ფანჯრის გახსნის მეტოდები
