@@ -17,10 +17,10 @@ class Statement extends Model
     protected $primaryKey = "id";
 
     protected $fillable = [
-        "beneficiary_name",
-        "beneficiary_lastname",
-        "beneficiary_phone",
-        "beneficiary_additional_phone",
+        "applicant_name",
+        "applicant_lastname",
+        "applicant_phone",
+        "applicant_additional_phone",
         "beneficiary_email",
         "beneficiary_juridical_status",
         "beneficiary_address1",

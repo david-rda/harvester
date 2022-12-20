@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('statements', function (Blueprint $table) {
             $table->id();
-            $table->string("beneficiary_name");
-            $table->string("beneficiary_lastname");
-            $table->string("beneficiary_phone");
-            $table->string("beneficiary_additional_phone");
+            $table->string("applicant_name");
+            $table->string("applicant_lastname");
+            $table->string("applicant_phone");
+            $table->string("applicant_additional_phone");
             $table->string("beneficiary_email");
             $table->string("beneficiary_juridical_status");
             $table->string("beneficiary_address1");

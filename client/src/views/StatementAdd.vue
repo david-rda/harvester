@@ -463,10 +463,10 @@
                 try {
                     const formData = new FormData(); // მოცემულ ობიექტში შეინახება ფორმიდან შეყვანილი მონაცემები(ბენეფიციარის)
 
-                    formData.append("beneficiary_name", this.name); // ბენეფიციარის სახელი
-                    formData.append("beneficiary_lastname", this.lastname); // ბენეფიციარის გვარი
-                    formData.append("beneficiary_phone", this.phone); // ბენეფიციარის მობილური
-                    formData.append("beneficiary_additional_phone", this.additional_phone); // ბენეფიციარის დამატებითი მობილური
+                    formData.append("applicant_name", this.name); // ბენეფიციარის სახელი
+                    formData.append("applicant_lastname", this.lastname); // ბენეფიციარის გვარი
+                    formData.append("applicant_phone", this.phone); // ბენეფიციარის მობილური
+                    formData.append("applicant_additional_phone", this.additional_phone); // ბენეფიციარის დამატებითი მობილური
                     formData.append("beneficiary_email", this.email); // ბენეფიციარის ელ. ფოსტა
                     formData.append("beneficiary_juridical_status", this.beneficiary_status); // ბენეფიციარის იურიდიული სტატუსი
                     formData.append("beneficiary_address1", this.address1); // ბენეფიციარის ფაქტობრივი მისამართი
@@ -474,6 +474,10 @@
                     formData.append("finance_condition", this.finance_condition); // ბენეფიციარის თანადაფინანსების პირობა
                     formData.append("own_finance", this.own_finance); // საკუთარი ფინანსები
                     formData.append("agency_finance", this.agency_finance); // სააგენტოს ფინანსები
+                    formData.append("beneficiary_name", this.beneficiary_name); // ბენეფიციარის სახელი
+                    formData.append("beneficiary_lastname", this.beneficiary_lastname); // ბენეფიციარის გვარი
+                    formData.append("beneficiary_pid", this.beneficiary_pid); // ბენეფიციარის პ/ნ
+                    formData.append("beneficiary_gender", this.beneficiary_gender); // ბენეფიციარის სქესი
 
                         for(let i = 1; i <= Object.keys(this.values).length; i++) {
                             formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება

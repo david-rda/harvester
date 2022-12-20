@@ -24,10 +24,10 @@ class StatementRequest extends FormRequest
     public function rules()
     {
         return [
-            "beneficiary_name" => "required|string",
-            "beneficiary_lastname" => "required|string",
-            "beneficiary_phone" => "required|numeric",
-            "beneficiary_additional_phone" => "required|numeric",
+            "applicant_name" => "required|string",
+            "applicant_lastname" => "required|string",
+            "applicant_phone" => "required|numeric",
+            "applicant_additional_phone" => "required|numeric",
             "beneficiary_email" => "required|string|email",
             "beneficiary_juridical_status" => "required|string",
             "beneficiary_address1" => "required|string",
@@ -51,10 +51,10 @@ class StatementRequest extends FormRequest
      */
     public function messages() {
         return [
-            "beneficiary_name.required" => "შეიყვანეთ თქვენი სახელი.",
-            "beneficiary_lastname.required" => "შეიყვანეთ თქვენი გვარი.",
-            "beneficiary_phone.required" => "შეიყვანეთ თქვენი მობილურის ნომერი",
-            "beneficiary_additional_phone.required" => "შეიყვანეთ თქვენი დამატებითი მობილურის ნომერი",
+            "applicant_name.required" => "შეიყვანეთ განმცხადებლის სახელი.",
+            "applicant_lastname.required" => "შეიყვანეთ განმცხადებლის გვარი.",
+            "applicant_phone.required" => "შეიყვანეთ განმცხადებლის მობილურის ნომერი",
+            "applicant_additional_phone.required" => "შეიყვანეთ განმცხადებლის დამატებითი მობილურის ნომერი",
             "beneficiary_email.required" => "შეიყვანეთ თქვენი ელ. ფოსტის მისამართი",
             "beneficiary_email.email" => "შეიყვანეთ სწორი ფორმატის ელ. ფოსტის მისამართი",
             "beneficiary_juridical_status.required" => "შეიყვანეთ თქვენი იურიდიული სტატუსი",
