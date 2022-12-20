@@ -75,6 +75,7 @@
             this.user = user?.data?.name + " " + user?.data?.lastname;
 
             this.$store.dispatch("setRole"); // ჰედერის ყოველი ჩატვირთვისას store-ში ჩაიწერება ავტორიზირებული მომხმარებლის როლის აიდი
+            this.$store.dispatch("setToken"); // ტოკენის შენახვა vuex სტორიში
         },
 
         methods : {
