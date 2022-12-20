@@ -2,7 +2,7 @@
     <div>
         <Header />
 
-        <div class="container mt-5 bg-white p-4">
+        <div class="container mt-5 bg-white p-5">
             <div class="row">
                 <div class="card p-4 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <form method="POST" @submit.prevent="add_statement()" :class="(this.submited) ? 'was-validated' : ''" novalidate>
@@ -56,8 +56,8 @@
                                 <span class="invalid-tooltip">აირჩიეთ ბენეფიციარის იურიდიული სტატუსი</span>
                             </div>
                         </div>
-                        <!-- ინდ. მეწარმის ველები -->
-                        <div class="row mb-4" v-if="this.status == 'ინდ. მეწარმე'">
+                        <!-- ინდ. მეწარმის ან ფიზიკური პირის ველები -->
+                        <div class="row mb-4" v-if="this.status == 'ინდ. მეწარმე' || this.status == 'ფიზიკური პირი'">
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="beneficiary_name" class="mb-2">ბენეფიციარის სახელი</label>
                                 <input type="text" required class="form-control" placeholder="სახელი" name="beneficiary_name" id="beneficiary_name" v-model="beneficiary_name">
@@ -114,12 +114,6 @@
                             </div>
                         </div>
                         <!-- იურიდიული პირის ველები -->
-
-                        <!-- ფიზიკური პირის ველები -->
-                        <div class="row mb-4" v-if="this.status == 'ფიზიკური პირი'">
-                            ფიზიკური პირი
-                        </div>
-                        <!-- ფიზიკური პირის ველები -->
 
                         <div class="row">
                             <div class="has-validation position-relative mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -437,10 +431,13 @@
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
                 values : {}, // მოცემულ მნიშვნელობებში ინახება
+                beneficiary_name : "", // ბენეფიციარის სახელი
+                beneficiary_lastname : "", // ბენეფიციარის გვარი
+                beneficiary_pid : "", // ბენეფიციარის პირადი ნომერი
                 beneficiary_gender : "", // ბენეფიციარის სქესი
 
                 // ========================================================= //
-                submited : false,
+                submited : false, // დადასტურების მნიშვნელობა. ანუ მოხდა თუ არა ფორმის დასაბმითება
 
                 status : ""
             }
@@ -526,7 +523,7 @@
 
 <style scoped lang="scss">
     .container {
-        border-radius: 4px;
+        border-radius: 8px;
     }
 
     input[type="text"], input[type="date"], input[type="number"], select {
