@@ -43,6 +43,10 @@ class StatementRequest extends FormRequest
             "company_ids" => "required|numeric",
             "prices" => "required",
             "quantities" => "required",
+            "beneficiary_name" => "required_if:beneficiary_name, !=, null",
+            "beneficiary_lastname" => "required_if:beneficiary_lastname, !=, null",
+            "beneficiary_pid" => "required_if:beneficiary_pid, !=, null",
+            "beneficiary_gender" => "required_if:beneficiary_gender, !=, null",
         ];
     }
 
@@ -71,6 +75,10 @@ class StatementRequest extends FormRequest
             "company_ids.required" => "შეიყვანეთ შეიყვანეთ მომწოდებელი კომპანიის საიდენტიფიკაციო კოდი",
             "prices.required" => "შეიყვანეთ 1 ერთეული ტექნიკის ფასი",
             "quantities.required" => "შეიყვანეთ ტექნიკის რაოდენობა",
+            "beneficiary_name.required" => "შეიყვანეთ ბენეფიციარის სახელი",
+            "beneficiary_lastname.required" => "შეიყვანეთ ბენეფიციარის გვარი",
+            "beneficiary_pid.required" => "შეიყვანეთ ბენეფიციარის პირადი ნომერი",
+            "beneficiary_gender.required" => "აირჩიეთ ბენეფიციარის სქესი"
         ];
     }
 }
