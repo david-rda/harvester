@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="has-validation position-relative mt-4 mb-3 col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                 <label class="mb-2">ბენეფიციარის იურიდიული სტატუსი</label>
-                                <select type="text" class="form-select" v-model="beneficiary_status" required>
+                                <select type="text" class="form-select" v-model="beneficiary_status" required v-on:change="getStatus($event)">
                                     <option value="" disabled selected>აირჩიეთ</option>
                                     <option value="ინდ. მეწარმე">ინდ. მეწარმე</option>
                                     <option value="იურიდიული პირი">იურიდიული პირი</option>
@@ -56,6 +56,70 @@
                                 <span class="invalid-tooltip">აირჩიეთ ბენეფიციარის იურიდიული სტატუსი</span>
                             </div>
                         </div>
+                        <!-- ინდ. მეწარმის ველები -->
+                        <div class="row mb-4" v-if="this.status == 'ინდ. მეწარმე'">
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_name" class="mb-2">ბენეფიციარის სახელი</label>
+                                <input type="text" required class="form-control" placeholder="სახელი" name="beneficiary_name" id="beneficiary_name" v-model="beneficiary_name">
+                                <span class="invalid-tooltip">შეიყვანეთ ბენეფიციარის სახელი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_lastname" class="mb-2">ბენეფიციარის სახელი</label>
+                                <input type="text" required class="form-control" placeholder="გვარი" name="beneficiary_lastname" id="beneficiary_lastname" v-model="beneficiary_lastname">
+                                <span class="invalid-tooltip">შეიყვანეთ ბენეფიციარის გვარი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_gender" class="mb-2">ბენეფიციარის სქესი</label>
+                                <select class="form-select" required name="beneficiary_gender" id="beneficiary_gender" v-model="beneficiary_gender">
+                                    <option value="" disabled selected>აირჩიეთ</option>
+                                    <option value="მამრობითი">მამრობითი</option>
+                                    <option value="მდედრობითი">მდედრობითი</option>
+                                </select>
+                                <span class="invalid-tooltip">აირჩიეთ ბენეფიციარის სქესი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_pid" class="mb-2">ბენეფიციარის პირადი ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="პირადი ნომერი" name="beneficiary_pid" id="beneficiary_pid" v-model="beneficiary_pid">
+                                <span class="invalid-tooltip">შეიყვანეთ ბენეფიციარის პირადი ნომერი</span>
+                            </div>
+                        </div>
+                        <!-- ინდ. მეწარმის ველები -->
+
+                        <!-- იურიდიული პირის ველები -->
+                        <div class="row mb-4" v-if="this.status == 'იურიდიული პირი'">
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_company_name" class="mb-2">კომპანიის დასახელება</label>
+                                <input type="text" required class="form-control" placeholder="კომპანიის დასახელება" name="beneficiary_company_name" id="beneficiary_company_name" v-model="beneficiary_company_name">
+                                <span class="invalid-tooltip">შეიყვანეთ კომპანიის დასახელებ</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_company_id" class="mb-2">კომპანიის საიდენტიფიკაციო ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="კომპანიის საიდენტიფიკაციო ნომერი" name="beneficiary_company_id" id="beneficiary_company_id" v-model="beneficiary_company_id">
+                                <span class="invalid-tooltip">შეიყვანეთ კომპანიის საიდენტიფიკაციო ნომერი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_company_director" class="mb-2">კომპანიის დირექტორის სახელი, გვარი</label>
+                                <input type="text" required class="form-control" placeholder="სახელი, გვარი" name="beneficiary_company_director" id="beneficiary_company_director" v-model="beneficiary_company_director">
+                                <span class="invalid-tooltip">შეიყვანეთ სახელი, გვარი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_company_mobile" class="mb-2">მობილური ტელეფონის ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="ნომერი" name="beneficiary_company_mobile" id="beneficiary_company_mobile" v-model="beneficiary_company_mobile">
+                                <span class="invalid-tooltip">შეიყვანეთ ნომერი</span>
+                            </div>
+                            <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                                <label for="beneficiary_company_addmobile" class="mb-2">დამატებითი ტელეფონის ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="დამატებითი ნომერი" name="beneficiary_company_addmobile" id="beneficiary_company_addmobile" v-model="beneficiary_company_addmobile">
+                                <span class="invalid-tooltip">შეიყვანეთ დამატებითი ნომერი</span>
+                            </div>
+                        </div>
+                        <!-- იურიდიული პირის ველები -->
+
+                        <!-- ფიზიკური პირის ველები -->
+                        <div class="row mb-4" v-if="this.status == 'ფიზიკური პირი'">
+                            ფიზიკური პირი
+                        </div>
+                        <!-- ფიზიკური პირის ველები -->
 
                         <div class="row">
                             <div class="has-validation position-relative mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -361,11 +425,11 @@
                 count : 1,
                 showError : false,
 
-                name : "", // ბენეფიციარის სახელი
-                lastname : "", // ბენეფიციარის გვარი
-                phone : "", // ბენეფიციარის ტელეფონის ნომერი
-                additional_phone : "", // ბენეფიციარის დამატებითი ტელეფონის ნომერი
-                email : "", // ბენეფიციარის იმეილი
+                name : "", // განმცხადებლის სახელი
+                lastname : "", // განმცხადებლის გვარი
+                phone : "", // განმცხადებლის ტელეფონის ნომერი
+                additional_phone : "", // განმცხადებლის დამატებითი ტელეფონის ნომერი
+                email : "", // განმცხადებლის იმეილი
                 beneficiary_status : "", // ბენეფიციარის იურიდიული სტატუსი
                 address1 : "", // ბენეფიციარის ფაქტობრივი მისამართი
                 address2 : "", // ბენეფიციარის იურიდიული მისამართი
@@ -373,9 +437,12 @@
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
                 values : {}, // მოცემულ მნიშვნელობებში ინახება
+                beneficiary_gender : "", // ბენეფიციარის სქესი
 
                 // ========================================================= //
-                submited : false
+                submited : false,
+
+                status : ""
             }
         },
 
@@ -435,6 +502,10 @@
                             this.showError = true;
                         }
                     }
+            },
+
+            getStatus(event) {
+                this.status = event.target.value;
             },
 
             // ფაილების ატვირთვისთვის ფანჯრის გახსნის მეტოდები
