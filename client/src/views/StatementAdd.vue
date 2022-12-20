@@ -53,7 +53,7 @@
                                     <option value="იურიდიული პირი">იურიდიული პირი</option>
                                     <option value="ფიზიკური პირი">ფიზიკური პირი</option>
                                 </select>
-                                <span class="invalid-tooltip">აირCიეთ ბენეფიციარის იურიდიული სტატუსი</span>
+                                <span class="invalid-tooltip">აირჩიეთ ბენეფიციარის იურიდიული სტატუსი</span>
                             </div>
                         </div>
 
