@@ -491,6 +491,7 @@
                             formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
                             formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                         }
+                        console.log(this.$store.state.token);
 
                         await axios.post("/statement/add", formData, {
                             headers : {

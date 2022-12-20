@@ -28,6 +28,10 @@ class Statement extends Model
         "finance_condition",
         "own_finance",
         "agency_finance",
+        "beneficiary_name",
+        "beneficiary_lastname",
+        "beneficiary_pid",
+        "beneficiary_gender"
     ];
 
     protected $dates = [
