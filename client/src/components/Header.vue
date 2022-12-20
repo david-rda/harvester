@@ -15,11 +15,17 @@
 
             <div class="collapse navbar-collapse" id="collNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link to="/statement/add" class="nav-link text-center"><strong>განაცხადის დამატება</strong></router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/statement/list" class="nav-link text-center"><strong>განაცხადების სია</strong></router-link>
+                    <li class="nav-item dropdown">
+                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>მოსავლის ამღები</strong></a>
+
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <router-link to="/statement/add" class="dropdown-item">განაცხადის დამატება</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/statement/list" class="dropdown-item">განაცხადების სია</router-link>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto text-center">
