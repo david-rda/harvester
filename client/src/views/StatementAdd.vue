@@ -494,9 +494,11 @@
                 var total = 0;
                 
                 for(let i = 0; i < this.$refs.price.length; i++) {
+                    this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
+
                     total += (this.$refs.price[i].value * this.$refs.quantity[i].value);
+
                     this.$refs.total.innerHTML = total;
-                    this.$refs.money[i].innerHTML = total;
                 }
             },
 
