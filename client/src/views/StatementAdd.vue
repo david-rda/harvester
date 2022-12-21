@@ -202,13 +202,13 @@
                                         <input ref="price" type="text" required class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="values['price_of_technic_' + key]">
                                         <ul class="nav">
                                             <li class="nav-item">
-                                                <a href="javascript:void(0)" class="nav-link">GEL</a>
+                                                <a href="javascript:void(0)" class="nav-link"><b>GEL</b></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="javascript:void(0)" class="nav-link">USD&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.usd_course }}</span></a>
+                                                <a href="javascript:void(0)" class="nav-link" @click="toUsd(index = key)"><b>USD</b>&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.usd_course }}</span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="javascript:void(0)" class="nav-link">EUR&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.euro_course }}</span></a>
+                                                <a href="javascript:void(0)" class="nav-link" @click="toEuro(index = key)"><b>EUR</b>&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.euro_course }}</span></a>
                                             </li>
                                         </ul>
                                         <span class="invalid-tooltip">შეიყვანეთ 1 ერთეული ტექნიკის ღირებულება</span>
@@ -470,6 +470,7 @@
 
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
+                tot : 0
             }
         },
 
@@ -477,8 +478,8 @@
             document.title = "განაცხადის დამატება";
 
             const data = await axios.get("https://nbg.gov.ge/gw/api/ct/monetarypolicy/currencies/ka/json");
-            this.usd_course = data?.data[0]?.currencies[40]?.rateFormated;
-            this.euro_course = data?.data[0]?.currencies[13]?.rateFormated;
+            this.usd_course = Number.parseFloat(data?.data[0]?.currencies[40]?.rateFormated);
+            this.euro_course = Number.parseFloat(data?.data[0]?.currencies[13]?.rateFormated);
         },
 
         methods : {
@@ -490,15 +491,22 @@
                 this.count--;
             },
 
+            toUsd(index) {
+                this.$refs.course[index - 1].innerHTML = this.usd_course;
+            },
+
+            toEuro(index) {
+                this.$refs.course[index - 1].innerHTML = this.euro_course;
+            },
+
             calculate() {
                 var total = 0;
                 
                 for(let i = 0; i < this.$refs.price.length; i++) {
                     this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
-
                     total += (this.$refs.price[i].value * this.$refs.quantity[i].value);
-
                     this.$refs.total.innerHTML = total;
+                    this.tot = total;
                 }
             },
 
