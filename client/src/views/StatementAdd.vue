@@ -200,6 +200,17 @@
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">1 ერთეული ტექნიკის ღირებულება</label>
                                         <input ref="price" type="text" required class="form-control" placeholder="1 ერთეული ტექნიკის ღირებულება" v-model="values['price_of_technic_' + key]">
+                                        <ul class="nav">
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" class="nav-link">GEL</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" class="nav-link">USD&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.usd_course }}</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="javascript:void(0)" class="nav-link">EUR&nbsp;&nbsp;&nbsp;<span class="badge bg-success p-2">{{ this.euro_course }}</span></a>
+                                            </li>
+                                        </ul>
                                         <span class="invalid-tooltip">შეიყვანეთ 1 ერთეული ტექნიკის ღირებულება</span>
                                     </div>
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
@@ -457,8 +468,8 @@
 
                 status : "",
 
-                usd_cource : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
-                euro_cource : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
+                usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
+                euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
             }
         },
 
@@ -466,8 +477,8 @@
             document.title = "განაცხადის დამატება";
 
             const data = await axios.get("https://nbg.gov.ge/gw/api/ct/monetarypolicy/currencies/ka/json");
-            this.usd_cource = data?.data[0]?.currencies[40];
-            this.euro_cource = data?.data[0]?.currencies[13];
+            this.usd_course = data?.data[0]?.currencies[40]?.rateFormated;
+            this.euro_course = data?.data[0]?.currencies[13]?.rateFormated;
         },
 
         methods : {
