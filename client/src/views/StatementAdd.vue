@@ -379,6 +379,12 @@
                                 <strong>განაცხადი ვერ გაიგზავნა. გთხოვთ გადაამოწმოთ მონაცემები</strong>
                             </div>
                         </div>
+                        <div class="row" v-if="showSuccess">
+                            <div class="alert alert-dismissible alert-success fade show">
+                                <a href="javascript:void" class="btn-close" data-bs-dismiss="alert"></a>
+                                <strong>განაცხადი გაიგზავნა</strong>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -418,6 +424,7 @@
             return {
                 count : 1,
                 showError : false,
+                showSuccess : false,
 
                 name : "", // განმცხადებლის სახელი
                 lastname : "", // განმცხადებლის გვარი
@@ -479,31 +486,32 @@
                     formData.append("beneficiary_pid", this.beneficiary_pid); // ბენეფიციარის პ/ნ
                     formData.append("beneficiary_gender", this.beneficiary_gender); // ბენეფიციარის სქესი
 
-                        for(let i = 1; i <= Object.keys(this.values).length; i++) {
-                            formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
-                            formData.append("models[]", this.values?.['technic_model_' + i]); // ტექნიკის მოდელი
-                            formData.append("engines[]", this.values?.['technic_engine_' + i]); // ტექნიკის ძრავის სიმძლავრე
-                            formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]); // ტექნიკის გამოშვების თარიღი
-                            formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]); // ტექნიკის მწარმოებელი ქვეყანა
-                            formData.append("use_fors[]", this.values?.['technic_use_to_' + i]); // ტექნიკის დანიშნულება
-                            formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]); // მომწოდებელი კომპანია
-                            formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
-                            formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
-                            formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
-                        }
-                        console.log(this.$store.state.token);
-
-                        await axios.post("/statement/add", formData, {
-                            headers : {
-                                "Authorization" : `Bearer ${this.$store.state.token}`
-                            }
-                        });
-                    }catch(err) {
-                        if(err instanceof AxiosError) {
-                            console.log(err?.response?.data?.errors);
-                            this.showError = true;
-                        }
+                    for(let i = 1; i <= Object.keys(this.values).length; i++) {
+                        formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
+                        formData.append("models[]", this.values?.['technic_model_' + i]); // ტექნიკის მოდელი
+                        formData.append("engines[]", this.values?.['technic_engine_' + i]); // ტექნიკის ძრავის სიმძლავრე
+                        formData.append("issue_dates[]", this.values?.['technic_issue_date_' + i]); // ტექნიკის გამოშვების თარიღი
+                        formData.append("manufacturers[]", this.values?.['technic_manufacturer_country_' + i]); // ტექნიკის მწარმოებელი ქვეყანა
+                        formData.append("use_fors[]", this.values?.['technic_use_to_' + i]); // ტექნიკის დანიშნულება
+                        formData.append("suppliers[]", this.values?.['technic_supplier_company_' + i]); // მომწოდებელი კომპანია
+                        formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
+                        formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
+                        formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                     }
+
+                    await axios.post("/statement/add", formData, {
+                        headers : {
+                            "Authorization" : `Bearer ${this.$store.state.token}`
+                        }
+                    });
+
+                    this.showSuccess = true;
+                }catch(err) {
+                    if(err instanceof AxiosError) {
+                        console.log(err?.response?.data?.errors);
+                        this.showError = true;
+                    }
+                }
             },
 
             getStatus(event) {
