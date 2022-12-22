@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="0" @change="calculate()">
+                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="1" @change="calculate()">
                                         <span class="invalid-tooltip">შეიყვანეთ რაოდენობა</span>
                                     </div>
                                 </div>
@@ -509,8 +509,7 @@
                 var total = 0;
                 
                 for(let i = 0; i < this.$refs.price.length; i++) {
-                    this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
-                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
+                    total += Number.parseFloat(this.$refs.money[i].innerHTML * this.$refs.quantity[i].value);
                     this.$refs.total.innerHTML = total;
                     this.tot = total;
                 }
