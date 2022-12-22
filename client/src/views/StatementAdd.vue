@@ -382,7 +382,7 @@
 
                         <div class="row">
                             <p><strong>გადასანაწილებელი <big>{{ 0 }}&nbsp;GEL</big></strong></p>
-                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ tot }}</span></big></strong></p>
+                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ this.tot }}</span></big></strong></p>
                         </div>
 
                         <div class="row">
@@ -470,6 +470,7 @@
 
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
+                tot : 0
             }
         },
 
@@ -497,6 +498,7 @@
                     this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
                     total += Number.parseFloat(this.$refs.money[i].innerHTML);
                     this.$refs.total.innerHTML = total;
+                    this.tot = total;
                 }
             },
 
