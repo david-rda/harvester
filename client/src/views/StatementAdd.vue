@@ -222,7 +222,7 @@
 
                                 <div class="row">
                                     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-                                        <div class="alert alert-secondary">
+                                        <div class="alert alert-secondary" style="background-color: #f5f8f9 !important">
                                             <p>მიმდინარე კურსი: <span ref="course" :key="key">0</span></p>
                                             <p>თანხა ლარში: <span ref="money" :key="key">{{ (values['price_of_technic_' + key]) ? values['price_of_technic_' + key] : '0.00' }}</span></p>
                                         </div>
