@@ -381,8 +381,8 @@
                         </div>
 
                         <div class="row">
-                            <p><strong>გადასანაწილებელი {{ 0 }}</strong></p>
-                            <p><strong>სულ</strong>&nbsp;<strong>{{ 0 }}</strong></p>
+                            <p><strong>გადასანაწილებელი <big>{{ 0 }}&nbsp;GEL</big></strong></p>
+                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ tot }}</span></big></strong></p>
                         </div>
 
                         <div class="row">
@@ -493,17 +493,35 @@
 
             toUsd(index) {
                 this.$refs.course[index - 1].innerHTML = this.usd_course;
+                this.$refs.money[index - 1].innerHTML = Number.parseInt(this.$refs.price[index - 1].value) * Number.parseFloat(this.usd_course);
+
+                var total = 0;
+
+                for(let i = 0; i < this.$refs.money.length; i++) {
+                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
+                    this.tot = (total).toLocaleString();
+                    this.$refs.total.innerHTML = (total).toLocaleString();
+                }
             },
 
             toEuro(index) {
                 this.$refs.course[index - 1].innerHTML = this.euro_course;
+                this.$refs.money[index - 1].innerHTML = Number.parseInt(this.$refs.price[index - 1].value) * Number.parseFloat(this.euro_course);
+
+                var total = 0;
+
+                for(let i = 0; i < this.$refs.money.length; i++) {
+                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
+                    this.tot = (total).toLocaleString();
+                    this.$refs.total.innerHTML = (total).toLocaleString();
+                }
             },
 
             calculate() {
                 var total = 0;
                 
                 for(let i = 0; i < this.$refs.price.length; i++) {
-                    this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
+                    //this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
                     total += (this.$refs.price[i].value * this.$refs.quantity[i].value);
                     this.$refs.total.innerHTML = total;
                     this.tot = total;
