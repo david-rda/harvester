@@ -491,6 +491,20 @@
                 this.count--;
             },
 
+            // მოცემული მეთოდი გამოიყენება თანხის გრაფაში დოლარის კურსის ჩასასმელად
+            toUsd(index) {
+                for(let i = 0; i < this.$refs.course.length; i++) {
+                    this.$refs.course[index - 1].innerHTML = this.usd_course;
+                }
+            },
+
+            // მოცემული მეთოდი გამოიყენება თანხის გრაფაში ევროს კურსის ჩასასმელად
+            toEuro(index) {
+                for(let i = 0; i < this.$refs.course.length; i++) {
+                    this.$refs.course[index - 1].innerHTML = this.euro_course;
+                }
+            },
+
             calculate() {
                 var total = 0;
                 
