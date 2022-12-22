@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="0" @keyup="calculate()" @change="calculate()">
+                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="0" @change="calculate()">
                                         <span class="invalid-tooltip">შეიყვანეთ რაოდენობა</span>
                                     </div>
                                 </div>
@@ -243,7 +243,7 @@
                         </div>
 
                         <div class="row">
-                            <p>სულ: <big><b ref="total">0</b></big>&nbsp;<big><b>GEL</b></big></p>
+                            <p>სულ: <big><b ref="total"></b></big>&nbsp;<big><b>GEL</b></big></p>
                         </div>
 
                         <h6 class="col-md-4 mt-4">წარმოსადგენი დოკუმენტაციის ნუსხა</h6>
@@ -470,7 +470,6 @@
 
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
-                tot : 0
             }
         },
 
@@ -491,40 +490,13 @@
                 this.count--;
             },
 
-            toUsd(index) {
-                this.$refs.course[index - 1].innerHTML = this.usd_course;
-                this.$refs.money[index - 1].innerHTML = Number.parseInt(this.$refs.price[index - 1].value) * Number.parseFloat(this.usd_course);
-
-                var total = 0;
-
-                for(let i = 0; i < this.$refs.money.length; i++) {
-                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
-                    this.tot = (total).toLocaleString();
-                    this.$refs.total.innerHTML = (total).toLocaleString();
-                }
-            },
-
-            toEuro(index) {
-                this.$refs.course[index - 1].innerHTML = this.euro_course;
-                this.$refs.money[index - 1].innerHTML = Number.parseInt(this.$refs.price[index - 1].value) * Number.parseFloat(this.euro_course);
-
-                var total = 0;
-
-                for(let i = 0; i < this.$refs.money.length; i++) {
-                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
-                    this.tot = (total).toLocaleString();
-                    this.$refs.total.innerHTML = (total).toLocaleString();
-                }
-            },
-
             calculate() {
                 var total = 0;
                 
                 for(let i = 0; i < this.$refs.price.length; i++) {
-                    //this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
-                    total += (this.$refs.price[i].value * this.$refs.quantity[i].value);
+                    this.$refs.money[i].innerHTML = (this.$refs.price[i].value * this.$refs.quantity[i].value);
+                    total += Number.parseFloat(this.$refs.money[i].innerHTML);
                     this.$refs.total.innerHTML = total;
-                    this.tot = total;
                 }
             },
 
