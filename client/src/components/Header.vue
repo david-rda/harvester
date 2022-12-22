@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="collNav">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>მოსავლის ამღები</strong></a>
+                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>პროექტები/პროგრამები</strong></a>
 
                         <ul class="dropdown-menu">
                             <li class="nav-item">

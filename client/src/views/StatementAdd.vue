@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="1" @change="calculate()">
+                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="1" @change="calculate()" @keyup="calculate()">
                                         <span class="invalid-tooltip">შეიყვანეთ რაოდენობა</span>
                                     </div>
                                 </div>
@@ -381,8 +381,8 @@
                         </div>
 
                         <div class="row">
-                            <p><strong>გადასანაწილებელი <big>{{ 0 }}&nbsp;GEL</big></strong></p>
-                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ this.tot }}</span></big></strong></p>
+                            <p><strong>გადასანაწილებელი&nbsp;<big>{{ this.tot }}&nbsp;GEL</big></strong></p>
+                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ this.tot1 }}</span></big></strong></p>
                         </div>
 
                         <div class="row">
@@ -470,7 +470,8 @@
 
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
-                tot : 0
+                tot : 0, // გადასანაწილებელი თანხა
+                tot1 : 0
             }
         },
 
@@ -507,11 +508,17 @@
 
             calculate() {
                 var total = 0;
-                
+                let t = 0;
+
                 for(let i = 0; i < this.$refs.price.length; i++) {
                     total += Number.parseFloat(this.$refs.money[i].innerHTML * this.$refs.quantity[i].value);
-                    this.$refs.total.innerHTML = total;
-                    this.tot = total;
+                    this.$refs.total.innerHTML = (total).toLocaleString();
+                    this.tot = (total).toLocaleString();
+                }
+
+                for(let i = 0; i < this.$refs.price.length; i++) {
+                    t += Number.parseFloat(this.$refs.price[i].value);
+                    this.tot1 = t.toLocaleString();
                 }
             },
 
