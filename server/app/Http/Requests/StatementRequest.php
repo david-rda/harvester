@@ -47,6 +47,13 @@ class StatementRequest extends FormRequest
             "beneficiary_lastname" => "required_if:beneficiary_lastname, !=, null",
             "beneficiary_pid" => "required_if:beneficiary_pid, !=, null",
             "beneficiary_gender" => "required_if:beneficiary_gender, !=, null",
+            "redistributable_price" => "required_if:redistributable_price,!=,null",
+            "total_price" => "required_if:total_price,!=,null",
+            "beneficiary_company_name" => "required_if:beneficiary_company_name, !=, null",
+            "beneficiary_company_id_number" => "required_if:beneficiary_company_id_number, !=, null",
+            "beneficiary_company_director" => "required_if:beneficiary_company_director, !=, null",
+            "beneficiary_company_phone" => "required_if:beneficiary_company_phone, !=, null",
+            "beneficiary_company_additional_phone" => "required_if:beneficiary_company_additional_phone, !=, null",
         ];
     }
 
