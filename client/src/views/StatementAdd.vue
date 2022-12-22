@@ -507,8 +507,8 @@
             },
 
             calculate() {
-                var total = 0;
-                let t = 0;
+                var total = 0; // დაჯამდება გადასანაწილებელი თანხა ჯამურად
+                let t = 0; // შეინახება ჯამური თანხა რაც ველებში იქნება შეყვანილი ერთეულის ფასი
 
                 for(let i = 0; i < this.$refs.price.length; i++) {
                     total += Number.parseFloat(this.$refs.money[i].innerHTML * this.$refs.quantity[i].value);
