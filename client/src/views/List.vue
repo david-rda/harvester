@@ -2,8 +2,25 @@
     <div>
         <Header />
         <div class="container bg-white p-4 mt-5">
-            <div class="table-responsive" v-if="show">
+            <div class="table-responsive" v-if="show && this.role == 3">
+                <h5 class="mb-5">ჩემი განაცხადები</h5>
 
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>განაცხადი</th>
+                            <th>დამატების თარიღი</th>
+                            <th>სტატუსი</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="data in this.statements" :key="data?.id">
+                            <td>{{ data?.id }}</td>
+                            <td>{{ data?.created_at }}</td>
+                            <td>{{ data?.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div v-else>
                 <div class="alert alert-primary d-flex align-items-center">
@@ -176,7 +193,8 @@
             return {
                 show : false,
                 full_date_string : "",
-                role : ""
+                role : "",
+                statements : ""
             }
         },
 
@@ -203,7 +221,7 @@
                     }
                 });
                 
-                console.log(statements?.data);
+                this.statements = statements?.data;
                 this.show = true;
             }catch(err) {
                 if(err instanceof AxiosError) {

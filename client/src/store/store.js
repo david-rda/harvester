@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 
 let store = createStore({
     state : {
-        role : "",
+        role : window.localStorage.getItem("role"),
         token : window.localStorage.getItem("token")
     },
 

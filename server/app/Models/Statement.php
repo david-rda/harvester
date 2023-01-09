@@ -72,4 +72,11 @@ class Statement extends Model
             get : fn() => $this->technic
         );
     }
+
+    // განაცხადის დამატების თარიღის ფორმატის ცვლილება მონაცემის გამოტანისას
+    public function createdAt() : Attribute {
+        return Attribute::make(
+            get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("m/d/Y H:i")
+        );
+    }
 }
