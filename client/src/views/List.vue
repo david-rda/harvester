@@ -5,7 +5,7 @@
             <div class="table-responsive" v-if="show && this.role == 3">
                 <h5 class="mb-5">ჩემი განაცხადები</h5>
 
-                <table class="table table-hover">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>განაცხადი</th>
@@ -272,7 +272,7 @@
 
     th {
         user-select: none;
-        border: none;
+        border-bottom: 1px solid #E7E7E7;
     }
 
     .btn {

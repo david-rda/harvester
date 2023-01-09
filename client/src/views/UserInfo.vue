@@ -87,7 +87,8 @@
 <style scoped lang="scss">
     .table {
         font-family: "frutiger_light";
-        font-size: 14px;;
+        font-size: 14px;
+        user-select: none;
     }
 
     td {
