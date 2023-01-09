@@ -93,8 +93,8 @@
                                 <span class="invalid-tooltip">შეიყვანეთ კომპანიის დასახელებ</span>
                             </div>
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                <label for="beneficiary_company_id" class="mb-2">კომპანიის საიდენტიფიკაციო ნომერი</label>
-                                <input type="text" required class="form-control" placeholder="კომპანიის საიდენტიფიკაციო ნომერი" name="beneficiary_company_id" id="beneficiary_company_id" v-model="beneficiary_company_id">
+                                <label for="beneficiary_company_id_number" class="mb-2">კომპანიის საიდენტიფიკაციო ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="კომპანიის საიდენტიფიკაციო ნომერი" name="beneficiary_company_id_number" id="beneficiary_company_id_number" v-model="beneficiary_company_id_number">
                                 <span class="invalid-tooltip">შეიყვანეთ კომპანიის საიდენტიფიკაციო ნომერი</span>
                             </div>
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -103,13 +103,13 @@
                                 <span class="invalid-tooltip">შეიყვანეთ სახელი, გვარი</span>
                             </div>
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                <label for="beneficiary_company_mobile" class="mb-2">მობილური ტელეფონის ნომერი</label>
-                                <input type="text" required class="form-control" placeholder="ნომერი" name="beneficiary_company_mobile" id="beneficiary_company_mobile" v-model="beneficiary_company_mobile">
+                                <label for="beneficiary_company_phone" class="mb-2">მობილური ტელეფონის ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="ნომერი" name="beneficiary_company_phone" id="beneficiary_company_phone" v-model="beneficiary_company_phone">
                                 <span class="invalid-tooltip">შეიყვანეთ ნომერი</span>
                             </div>
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                <label for="beneficiary_company_addmobile" class="mb-2">დამატებითი ტელეფონის ნომერი</label>
-                                <input type="text" required class="form-control" placeholder="დამატებითი ნომერი" name="beneficiary_company_addmobile" id="beneficiary_company_addmobile" v-model="beneficiary_company_addmobile">
+                                <label for="beneficiary_company_additional_phone" class="mb-2">დამატებითი ტელეფონის ნომერი</label>
+                                <input type="text" required class="form-control" placeholder="დამატებითი ნომერი" name="beneficiary_company_additional_phone" id="beneficiary_company_additional_phone" v-model="beneficiary_company_additional_phone">
                                 <span class="invalid-tooltip">შეიყვანეთ დამატებითი ნომერი</span>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile3($event)" ref="entrepreneurFile">
+                                    <input type="file" v-on:change="entrepreneurFile($event)" ref="entrepreneurFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openEntrepreneurDocument()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>ამონაწერი მეწარმეთა და არასამეწარმეო (არაკომერციული) იურიდიული პირების რეესტრიდან (იურიდიული პირის შემთხვევაში).</span>
                                 </div>
@@ -283,7 +283,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile4($event)" ref="notaryFile">
+                                    <input type="file" v-on:change="notaryFile($event)" ref="notaryFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openFileNotary()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>იურიდიული პირების შემთხვევაში − ნოტარიული წესით დამოწმებული დამფუძნებლების/პარტნიორების კრების ოქმი პროგრამაში მონაწილეობისა და სააგენტოსთან გასაფორმებელი ხელშეკრულებით გათვალისწინებული ვალდებულებების აღების თაობაზე (ასეთის საჭიროების შემთხვევაში).</span>
                                 </div>
@@ -294,7 +294,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile5($event)" ref="invoiceFile">
+                                    <input type="file" v-on:change="invoiceFile($event)" ref="invoiceFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openInvoiceFile()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>შესასყიდი მიზნობრიობის ინვოისი ან/და ხელშეკრულება ქართულ ენაზე (ტექნიკის იმპორტის შემთხვევაში ნოტარიულად დამოწმებული თარგმანი), რომელიც აუცილებელი წესით უნდა მოიცავდეს შემდეგ ინფორმაციას: მოსავლის ამღები სასოფლო-სამეურნეო ტექნიკის დასახელება, მახასიათებლები (მოდელი, ცხ.ძ (ასეთის არსებობის შემთხვევაში), გამოშვების წელი, ექსპლუატაციაში არ ყოფნის შესახებ სტატუსი, მწარმოებელი ქვეყანა, დანიშნულება (აღწერილი უნდა იყოს თუ რა სასოფლო-სამეურნეო დანიშნულებით გამოიყენება წარმოდგენილი ტექნიკა), მხარეთა რეკვიზიტები, მიწოდების ვადა (არაუმეტეს 5 თვისა), გადახდის პირობები. შენიშვნა: ტექნიკის ადგილობრივი მომწოდებლის შემთხვევაში გადახდის პირობა აუცილებელი წესით უნდა მოიცავდეს შემდეგ ინფორმაციას, რომ სააგენტოს თანადაფინანსების თანხის გადახდა მოხდება ტექნიკის მიწოდების შემდეგ.</span>
                                 </div>
@@ -305,7 +305,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile6($event)" ref="grantFile">
+                                    <input type="file" v-on:change="warantyFile($event)" ref="warantyFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openGrantDocumentFile()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>სასოფლო-სამეურნეო ტექნიკის საგარანტიო დოკუმენტი (საგარანტიო პირობები უნდა ვრცელდებოდეს განაცხადის წარდგენიდან არანაკლებ 6 თვის ვადით) გაცემული მწარმოებლის ან/და მიმწოდებლის მიერ.</span>
                                 </div>
@@ -316,7 +316,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile7($event)" ref="inquiryFile">
+                                    <input type="file" v-on:change="inquiryFile($event)" ref="inquiryFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openInquiryFile()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>ცნობა ან/და შედარების აქტი სსიპ - შემოსავლების სამსახურიდან დავალიანების არარსებობის შესახებ.</span>
                                 </div>
@@ -327,7 +327,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile8($event)" ref="complicityFile">
+                                    <input type="file" v-on:change="complicityFile($event)" ref="complicityFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openComplicityFile()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>თანამონაწილეობის თანხის დამადასტურებელი დოკუმენტი - ცნობა/ამონაწერი/ხელშეკრულება ბანკიდან შესაბამისი თანხის ანგარიშზე არსებობის შესახებ ან/და ცნობა ბანკიდან / საფინანსო ინსტიტუტიდან კრედიტის/ლიზინგის/ დამტკიცების თაობაზე.</span>
                                 </div>
@@ -338,7 +338,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile9($event)" ref="accountFile">
+                                    <input type="file" v-on:change="bankFile($event)" ref="accountFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="bankAccountDetails()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>საბანკო რეკვიზიტები.</span>
                                 </div>
@@ -349,7 +349,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile10($event)" ref="examinFile">
+                                    <input type="file" v-on:change="experticeFile($event)" ref="examinFile">
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openExaminationFile()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>სსიპ ლევან სამხარაულის სახელობის სასამართლო ექსპერტიზის ბიუროს ან/და სსიპ „აკრედიტაციის ეროვნული ორგანოს - აკრედიტაციის ცენტრის“ მიერ აკრედიტირებული პირების ან/და საქართველოს ფინანსთა სამინისტროს სისტემაში შემავალი სახელმწიფო საქვეუწყებო დაწესებულების - ბუღალტრული აღრიცხვის, ანგარიშგებისა და აუდიტის ზედამხედველობის სამსახურის მიერ წარმოებულ რეესტრში არსებული პირის საექსპერტო/აუდიტორული დასკვნა წარმოდგენილი პროექტის საინვესტიციო ღირებულების საბაზრო ფასებთან შესაბამისობის შესახებ.</span>
                                 </div>
@@ -360,7 +360,7 @@
                         <div class="row">
                             <div class="mb-3 mt-4 col-lg-12 col-md-12 col-xs-12 col-sm-12">
                                 <div class="file_block p-3">
-                                    <input type="file" v-on:change="handleFile11($event)" ref="additional">
+                                    <input type="file" v-on:change="additionalDocuments($event)" ref="additional" multiple>
                                     <button type="button" class="col-md-3 col-lg-3" v-on:click="openAdditionalFiles()">ფაილის არჩევა&nbsp;<BIconFolder2 /></button>
                                     <span>სხვა დამატებითი დოკუმენტაცია, სააგენტოს მიერ მოთხოვნის შემთხვევაში.</span>
                                 </div>
@@ -430,7 +430,9 @@
         bankAccountDetails,
         openExaminationFile,
         openAdditionalFiles
-    } from "../helpers/openFile"
+    } from "../helpers/openFile";
+    import { handlePersonalId, handlePersonalId1, entrepreneurFile, notaryFile,
+            invoiceFile, warantyFile, inquiryFile, complicityFile, bankFile, experticeFile, additionalDocuments } from "../helpers/handle";
     
     export default {
         name : "StatementAdd",
@@ -462,6 +464,7 @@
                 beneficiary_lastname : "", // ბენეფიციარის გვარი
                 beneficiary_pid : "", // ბენეფიციარის პირადი ნომერი
                 beneficiary_gender : "", // ბენეფიციარის სქესი
+                statement_files : [], // მოცემულ მასივსი ჩაიწერება განაცხადისთვის საჭირო ფაილები
 
                 // ========================================================= //
                 submited : false, // დადასტურების მნიშვნელობა. ანუ მოხდა თუ არა ფორმის დასაბმითება
@@ -471,7 +474,7 @@
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
                 tot : 0, // გადასანაწილებელი თანხა
-                tot1 : 0
+                tot1 : 0 // ველებში შეყვანილი ჯამური თანხა
             }
         },
 
@@ -544,6 +547,12 @@
                     formData.append("beneficiary_lastname", this.beneficiary_lastname); // ბენეფიციარის გვარი
                     formData.append("beneficiary_pid", this.beneficiary_pid); // ბენეფიციარის პ/ნ
                     formData.append("beneficiary_gender", this.beneficiary_gender); // ბენეფიციარის სქესი
+                    formData.append("redistributable_price", this.tot); // გადასანაწილებელი თანხა
+                    formData.append("beneficiary_company_name", this.beneficiary_company_name);
+                    formData.append("beneficiary_company_id_number", this.beneficiary_company_id_number);
+                    formData.append("beneficiary_company_director", this.beneficiary_company_director);
+                    formData.append("beneficiary_company_phone", this.beneficiary_company_phone);
+                    formData.append("beneficiary_company_additional_phone", this.beneficiary_company_additional_phone);
 
                     for(let i = 1; i <= Object.keys(this.values).length; i++) {
                         formData.append("names[]", this.values?.['technic_name_' + i]); // ტექნიკის დასახელება
@@ -588,7 +597,20 @@
             openComplicityFile,
             bankAccountDetails,
             openExaminationFile,
-            openAdditionalFiles
+            openAdditionalFiles,
+
+            // მოცემული მეთოდების დახმარებით შეგვიძლია სრული წვდომა განვახორციელოთ ატვირთულ ფაილებზე
+            handlePersonalId,
+            handlePersonalId1,
+            entrepreneurFile,
+            notaryFile,
+            invoiceFile,
+            warantyFile,
+            inquiryFile,
+            complicityFile,
+            bankFile,
+            experticeFile,
+            additionalDocuments
         }
     }
 </script>

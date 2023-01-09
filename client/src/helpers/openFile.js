@@ -43,7 +43,7 @@ function openInvoiceFile() {
  * განაცხადის წარდგენიდან არანაკლებ 6 თვის ვადით) გაცემული მწარმოებლის ან/და მიმწოდებლის მიერ.
  */
 function openGrantDocumentFile() {
-    this.$refs.grantFile.click();
+    this.$refs.warantyFile.click();
 }
 
 // ცნობა ან/და შედარების აქტი სსიპ - შემოსავლების სამსახურიდან დავალიანების არარსებობის შესახებ.
