@@ -77,10 +77,6 @@
             });
             this.user_info = info?.data;
         },
-
-        methods : {
-            
-        }
     }
 </script>
 
