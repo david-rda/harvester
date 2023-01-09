@@ -8,7 +8,9 @@ use App\Http\Requests\StatementRequest;
 use App\Http\Interfaces\IStatement;
 use App\Models\Statement;
 use App\Models\Technic;
+use App\Models\File;
 use Carbon\Carbon; // თარიღებთან სამუშაო ფასადი
+use Str; // სტრინგებთან სამუშაო ფასადი
 
 class StatementController extends Controller implements IStatement
 {
@@ -41,6 +43,27 @@ class StatementController extends Controller implements IStatement
                     "created_at" => Carbon::now(),
                     "updated_at" => Carbon::now()
                 ]);
+            }
+
+            if($request->file("files")) {
+                foreach($request->file("files") as $file) {
+                    $original = $file->getClientOriginalName(); // ფაილის ორიგინალი სახელი
+                    $ext = $file->getClientOriginalExtension(); // ფაილის გაფართოება
+                    $mime = $file->getMimeType(); // ფაილის ტიპი
+
+                    $filename = str_replace(" ", "_", time() . "-" . strtoupper(Str::random(4)) . "." . $ext); // ფაილის ახალი დაგენერირებული სახელი
+                    $file->move("documents", $filename); // ფაილის შენახვა ფოლდერში
+
+                    File::insert([
+                        "statement_id" => $create->id,
+                        "filename" => $filename,
+                        "original_name" => $original,
+                        "extension" => $ext,
+                        "memetype" => $mime,
+                        "created_at" => Carbon::now(),
+                        "updated_at" => Carbon::now()
+                    ]);
+                }
             }
 
             return response()->json([

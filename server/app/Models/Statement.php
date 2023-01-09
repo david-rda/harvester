@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Technic;
+use App\Models\File;
 
 class Statement extends Model
 {
@@ -58,6 +59,11 @@ class Statement extends Model
     // კავშირის დამყარება ტექნიკის ცხრილთან
     public function technic() {
         return $this->hasMany(Technic::class, "statement_id", "id");
+    }
+
+    // კავშირის დამყარება ფაილების ცხრილთან
+    public function file() {
+        return $this->hasMany(File::class, "statement_id", "id");
     }
 
     // technics ველში ჩაიყრება განაცხადის ცხრილთან დაკავშირებული ტექნიკები

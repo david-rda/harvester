@@ -1,57 +1,69 @@
 // ბენეფიციარის პირადობის მოწმობის ასლის ფაილი
 function handlePersonalId(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // წარმომადგენლობაზე უფლებამოსილი პირის პირადობის მოწმობის ასლის ფაილი
 function handlePersonalId1(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // ამონაწერი
 function entrepreneurFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // ნოტარიუსის ფაილი
 function notaryFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // ინვოისის ფაილი
 function invoiceFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // ტექნიკის გარანტიის ფაილი
 function warantyFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // ცნობის ფაილი
 function inquiryFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // თანამონაწილეობის დამადასტურებელი თანხის ფაილი
 function complicityFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // საბანკო რეკვიზიტების ფაილი
 function bankFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 // სამხარაულის ექსპერტიზის ფაილი
 function experticeFile(e) {
-    window.alert(e.target.files[0].name);
+    this.statement_files.push(e.target.files[0]);
+    window.alert(this.statement_files);
 }
 
 function additionalDocuments(e) {
     for(let i = 0; i < e.target.files.length; i++) {
-        console.log(e.target.files[i].name);
+        this.statement_files.push(e.target.files[i]);
     }
+
+    window.alert(this.statement_files);
 }
 
 export { handlePersonalId, handlePersonalId1, entrepreneurFile, notaryFile, invoiceFile, warantyFile, inquiryFile, complicityFile, bankFile, experticeFile, additionalDocuments }

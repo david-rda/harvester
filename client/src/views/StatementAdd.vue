@@ -567,6 +567,10 @@
                         formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                     }
 
+                    for(let i = 0; i < this.statement_files.length; i++) {
+                        formData.append("files[]", this.statement_files[i]);
+                    }
+
                     await axios.post("/statement/add", formData, {
                         headers : {
                             "Authorization" : `Bearer ${this.$store.state.token}`
