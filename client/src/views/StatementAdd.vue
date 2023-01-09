@@ -567,6 +567,8 @@
                         formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
                     }
 
+                    // მოცემული ციკლის საშუალებით formdata-ში ჩაიწერება ატვირთული ფაილები
+                    // რომელიც უნდა გადაიგზავნოს სერვერზე
                     for(let i = 0; i < this.statement_files.length; i++) {
                         formData.append("files[]", this.statement_files[i]);
                     }
