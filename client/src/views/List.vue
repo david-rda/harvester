@@ -18,6 +18,7 @@
                             <td>{{ data?.id }}</td>
                             <td>{{ data?.created_at }}</td>
                             <td>{{ data?.status }}</td>
+                            <td><router-link :to="'/details/' + data?.id">ნახვა</router-link></td>
                         </tr>
                     </tbody>
                 </table>
