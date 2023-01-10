@@ -62,6 +62,11 @@ class Statement extends Model
         return $this->hasMany(Technic::class, "statement_id", "id");
     }
 
+    // სტატუსების ცხრილთან კავშირის დამყარება
+    public function status() {
+        return $this->hasOne(Status::class, "id", "status_id");
+    }
+
     // კავშირის დამყარება ფაილების ცხრილთან
     public function file() {
         return $this->hasMany(File::class, "statement_id", "id");

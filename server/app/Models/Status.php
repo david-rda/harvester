@@ -22,6 +22,6 @@ class Status extends Model
 
     // სტატუსების ცხრილის დაკავშირება განაცხადებთან
     public function statement() {
-        return $this->belongsTo(Statement::class, "id", "status_id");
+        return $this->belongsTo(Statement::class, "status_id", "id");
     }
 }
