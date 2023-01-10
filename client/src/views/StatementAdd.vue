@@ -372,17 +372,17 @@
                         <div class="row">
                             <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="finance" class="mb-2">საკუთარი სახსრები/დაფინანსების სხვა ფულადი წყარო</label>
-                                <input type="text" class="form-control" placeholder="0 GEL" name="finance" id="finance" disabled v-model="own_finance">
+                                <input type="text" ref="own_finance" class="form-control" placeholder="0 GEL" name="finance" id="finance" v-model="own_finance">
                             </div>
                             <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <label for="agency_finance" class="mb-2">სააგენტოს დაფინანსება</label>
-                                <input type="text" class="form-control" placeholder="0 GEL" name="agency_finance" id="agency_finance" disabled v-model="agency_finance">
+                                <input type="text" ref="agency_finance" class="form-control" placeholder="0 GEL" name="agency_finance" id="agency_finance" v-model="agency_finance">
                             </div>
                         </div>
 
                         <div class="row">
-                            <p><strong>გადასანაწილებელი&nbsp;<big>{{ this.tot }}&nbsp;GEL</big></strong></p>
-                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ this.tot1 }}</span></big></strong></p>
+                            <p><strong>გადასანაწილებელი&nbsp;<big>{{ this.tot1 }}&nbsp;GEL</big></strong></p>
+                            <p><strong>სულ</strong>&nbsp;<strong><big>GEL&nbsp;<span>{{ this.tot }}</span></big></strong></p>
                         </div>
 
                         <div class="row">
@@ -511,17 +511,25 @@
 
             calculate() {
                 var total = 0; // დაჯამდება გადასანაწილებელი თანხა ჯამურად
-                let t = 0; // შეინახება ჯამური თანხა რაც ველებში იქნება შეყვანილი ერთეულის ფასი
 
                 for(let i = 0; i < this.$refs.price.length; i++) {
                     total += Number.parseFloat(this.$refs.money[i].innerHTML * this.$refs.quantity[i].value);
-                    this.$refs.total.innerHTML = (total).toLocaleString();
-                    this.tot = (total).toLocaleString();
-                }
+                    this.$refs.total.innerHTML = total;
+                    this.tot = total;
 
-                for(let i = 0; i < this.$refs.price.length; i++) {
-                    t += Number.parseFloat(this.$refs.price[i].value);
-                    this.tot1 = t.toLocaleString();
+                    this.own_finance = this.tot;
+
+                    if(this.finance_condition == "კომბაინი" && total <= 150000) {
+                        let percent = (total * 30) / 100; // აქ ხდება დაფინანსების პროცენტის გამოთვლა თუ რამდენს იხდის სააგენტო
+                        this.agency_finance = percent;
+
+                        this.tot1 = this.tot - percent; // აქ გამოითვლება გადასანაწილებელი თანხა
+                    }else if(this.finance_condition == "სხვა ტიპის მოსავლის ამღები ტექნიკა (გარდა ყურძნის)" && total <= 150000) {
+                        let percent = (total * 50) / 100; // აქ ხდება დაფინანსების პროცენტის გამოთვლა თუ რამდენს იხდის სააგენტო
+                        this.agency_finance = percent;
+
+                        this.tot1 = this.tot - percent; // აქ გამოითვლება გადასანაწილებელი თანხა
+                    }
                 }
             },
 
