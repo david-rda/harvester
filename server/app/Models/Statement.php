@@ -39,7 +39,8 @@ class Statement extends Model
         "beneficiary_name",
         "beneficiary_lastname",
         "beneficiary_pid",
-        "beneficiary_gender"
+        "beneficiary_gender",
+        "status_id"
     ];
 
     protected $dates = [

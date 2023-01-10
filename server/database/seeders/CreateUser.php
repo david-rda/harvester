@@ -16,6 +16,7 @@ class CreateUser extends Seeder
     public function run()
     {
         $user = new User();
+        $user->role_id = 3;
         $user->name = "დავით";
         $user->lastname = "ჭეჭელაშვილი";
         $user->birth_date = "07-06-1999";

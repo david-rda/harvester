@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string("beneficiary_company_director")->nullable();
             $table->string("beneficiary_company_phone")->nullable();
             $table->string("beneficiary_company_additional_phone")->nullable();
+            $table->integer("status_id")->nullable();
             $table->string("own_finance")->nullable()->default(0);
             $table->string("agency_finance")->nullable()->default(0);
             $table->string("redistributable_price")->nullable();
