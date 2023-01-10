@@ -9,6 +9,7 @@ import StatementAdd from "../views/StatementAdd.vue";
 import Register from "../views/Register.vue";
 import Recovery from "../views/Recovery.vue";
 import List from "../views/List.vue";
+import Details from "../views/Details.vue";
 import NotFound from "../components/NotFound.vue";
 // END კომპონენტები
 
@@ -44,6 +45,10 @@ const routes = [
     {
         path : "/statement/list",
         component : List
+    },
+    {
+        path : "/details/:id",
+        component : Details
     },
     {
         path : "/:pathMatch(.*)*",
