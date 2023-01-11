@@ -64,7 +64,7 @@
                                 <span class="invalid-tooltip">შეიყვანეთ ბენეფიციარის სახელი</span>
                             </div>
                             <div class="has-validation position-relative mt-3 mb-3 col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                <label for="beneficiary_lastname" class="mb-2">ბენეფიციარის სახელი</label>
+                                <label for="beneficiary_lastname" class="mb-2">ბენეფიციარის გვარი</label>
                                 <input type="text" required class="form-control" placeholder="გვარი" name="beneficiary_lastname" id="beneficiary_lastname" v-model="beneficiary_lastname">
                                 <span class="invalid-tooltip">შეიყვანეთ ბენეფიციარის გვარი</span>
                             </div>

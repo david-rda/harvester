@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("statement_id")->constrained()->onDelete("cascade");
             $table->string("fullname")->nullable();
-            $table->integer("pid_or_company_id")->nullable();
+            $table->bigInteger("pid_or_company_id")->nullable();
             $table->integer("part_percent")->nullable();
             $table->timestamps();
         });

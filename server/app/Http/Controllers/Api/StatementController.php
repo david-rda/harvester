@@ -9,6 +9,7 @@ use App\Http\Interfaces\IStatement;
 use App\Models\Statement;
 use App\Models\Technic;
 use App\Models\File;
+use App\Models\Founder;
 use Carbon\Carbon; // თარიღებთან სამუშაო ფასადი
 use Str; // სტრინგებთან სამუშაო ფასადი
 
@@ -48,9 +49,9 @@ class StatementController extends Controller implements IStatement
             for($i = 0; $i < sizeof($request->founder_fullname); $i++) {
                 Founder::insert([
                     "statement_id" => $create->id,
-                    "founder_fullname" => $request->founder_fullname[$i],
+                    "fullname" => $request->founder_fullname[$i],
                     "pid_or_company_id" => $request->pid_idcode[$i],
-                    "part" => $request->part[$i],
+                    "part_percent" => $request->part[$i],
                     "created_at" => Carbon::now(),
                     "updated_at" => Carbon::now()
                 ]);
