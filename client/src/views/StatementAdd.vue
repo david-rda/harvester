@@ -247,32 +247,37 @@
                         </div>
 
                         <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
-                        <div class="mb-4" v-if="this.status == 'იურიდიული პირი'">
-                            <div class="container-fluid p-3">
-                                <h6 class="col-md-4 mt-4">დამფუძნებლების / მეპაიეების სტრუქტურა</h6>
+                        <div v-if="this.status == 'იურიდიული პირი'">
+                            <div class="mb-4" v-for="key in count_founders" :key="key">
+                                <div class="container-fluid p-3">
+                                    <h6 class="col-md-4 mt-4">დამფუძნებლების / მეპაიეების სტრუქტურა</h6>
 
-                                <div class="row mb-4">
-                                    <div class="row">
-                                        <div class="has-validation position-relative col-md-5 col-lg-5 col-sm-12 col-xs-12">
-                                            <label class="mb-1">დამფუძნებლის / მეპაიის სახელი, გვარი ( იურიდიული პირის შემთხვევაში დასახელება )</label>
-                                            <input type="text" required class="form-control" placeholder="დამფუძნებლის / მეპაიე ..." v-model="values['founder_fullname' + key]">
-                                            <span class="invalid-tooltip">შეიყვანეთ მეპაიეს სახელი, გვარი</span>
-                                        </div>
+                                    <div class="row mb-4">
+                                        <div class="row">
+                                            <div class="has-validation position-relative col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                                                <label class="mb-1">დამფუძნებლის / მეპაიის სახელი, გვარი ( იურიდიული პირის შემთხვევაში დასახელება )</label>
+                                                <input type="text" required class="form-control" placeholder="დამფუძნებლის / მეპაიე ..." v-model="values_co['founder_fullname' + key]">
+                                                <span class="invalid-tooltip">შეიყვანეთ მეპაიეს სახელი, გვარი</span>
+                                            </div>
 
-                                        <div class="has-validation position-relative col-md-3 col-lg-3 col-sm-12 col-xs-12">
-                                            <label class="mb-1">პირადი ნომერი / საიდენტიფიკაციო ნომერი</label>
-                                            <input type="text" required class="form-control" placeholder="პ/ნ. / ს/კ. ..." v-model="values['pid_idcode' + key]">
-                                            <span class="invalid-tooltip"></span>
-                                        </div>
+                                            <div class="has-validation position-relative col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                                <label class="mb-1">პირადი ნომერი / საიდენტიფიკაციო ნომერი</label>
+                                                <input type="text" required class="form-control" placeholder="პ/ნ. / ს/კ. ..." v-model="values_co['pid_idcode' + key]">
+                                                <span class="invalid-tooltip">შეიყვანეთ პ/ნ. ს/კ</span>
+                                            </div>
 
-                                        <div class="has-validation position-relative col-md-4 col-lg-4 col-sm-12 col-xs-12">
-                                            <label class="mb-1">კომპანიის წილის / პაის / აქციების მფლობელობა პროცენტებში / ერთეულებში</label>
-                                            <input type="text" required class="form-control" placeholder="წილი" v-model="values['part' + key]">
-                                            <span class="invalid-tooltip">შეიყვანეთ წილი</span>
+                                            <div class="has-validation position-relative col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                                                <label class="mb-1">კომპანიის წილის / პაის / აქციების მფლობელობა პროცენტებში / ერთეულებში</label>
+                                                <input type="text" required class="form-control" placeholder="წილი" v-model="values_co['part' + key]">
+                                                <span class="invalid-tooltip">შეიყვანეთ წილი</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <button type="button" @click="addFounder()">დამფუძნებლის დამატება&nbsp;<BIconPlusLg /></button>
+                            <button type="button" @click="removeFounder()" v-if="this.count_founders > 1" class="danger ms-2">დამფუძნებლის დამატება</button>
                         </div>
                         <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
 
@@ -475,6 +480,7 @@
         data() {
             return {
                 count : 1,
+                count_founders : 1,
                 showError : false,
                 showSuccess : false,
 
@@ -490,6 +496,7 @@
                 agency_finance : "", // სააგენტოს თანადაფინანსება
                 own_finance : "", // ბენეფიციარის საკუთარი ფინანსები,
                 values : {}, // მოცემულ მნიშვნელობებში ინახება
+                values_co : {}, // მოცემულ ობიექტში ინახება დამფუძნებლის ინფორმაციები
                 beneficiary_name : "", // ბენეფიციარის სახელი
                 beneficiary_lastname : "", // ბენეფიციარის გვარი
                 beneficiary_pid : "", // ბენეფიციარის პირადი ნომერი
@@ -517,12 +524,24 @@
         },
 
         methods : {
+            // ტექნიკის ველის დამატება
             addTechnicForm() {
                 this.count++;
             },
-
+            
+            // ტექნიკის ველის წაშლა
             removeForm() {
                 this.count--;
+            },
+
+            // ამ ფუნქციით მოხდება მეპაიის ველის დამატება
+            addFounder() {
+                this.count_founders++;
+            },
+
+            // ამ ფუნქციით მოხდება მეპაიის ველის წაშლა
+            removeFounder() {
+                this.count_founders--;
             },
 
             // მოცემული მეთოდი გამოიყენება თანხის გრაფაში დოლარის კურსის ჩასასმელად
@@ -603,6 +622,12 @@
                         formData.append("company_ids[]", this.values?.['company_id_' + i]); // კომპანიის ს/კ
                         formData.append("prices[]", this.values?.['price_of_technic_' + i]); // ტექნიკის ერთეულის ღირებულება
                         formData.append("quantities[]", this.values?.['number_of_technic_' + i]); // ტექნიკის ღირებულება
+                    }
+                    
+                    for(let i = 1; i <= Object.keys(this.values_co).length; i++) {
+                        formData.append("founder_fullname[]", this.values_co?.['founder_fullname' + i]); // დამფუძნებლის სახელი, გვარი
+                        formData.append("pid_idcode[]", this.values_co?.['pid_idcode' + i]); // p/n s/k
+                        formData.append("part[]", this.values_co?.['part' + i]); // წილის მოცულობა
                     }
 
                     // მოცემული ციკლის საშუალებით formdata-ში ჩაიწერება ატვირთული ფაილები

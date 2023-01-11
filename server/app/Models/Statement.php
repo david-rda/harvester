@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Technic;
 use App\Models\File;
+use App\Models\Founder;
 
 class Statement extends Model
 {
@@ -60,6 +61,11 @@ class Statement extends Model
     // კავშირის დამყარება ტექნიკის ცხრილთან
     public function technic() {
         return $this->hasMany(Technic::class, "statement_id", "id");
+    }
+
+    // დამფუძნებლების ცხრილთან დაკავშირება
+    public function founder() {
+        return $this->hasMany(Founder::class, "statement_id", "id");
     }
 
     // სტატუსების ცხრილთან კავშირის დამყარება
