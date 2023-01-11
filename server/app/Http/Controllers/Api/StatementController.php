@@ -92,7 +92,7 @@ class StatementController extends Controller implements IStatement
      * @param int id
      * @return json
      */
-    public function StatementGet($id) {
+    public function StatementGet(int $id) {
         return Statement::find($id);
     }
 }

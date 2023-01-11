@@ -8,5 +8,7 @@
         public function CreateStatement(StatementRequest $request); // განაცხადის შენახვის მეთოდი
 
         public function StatementList(); // განაცხადების გამოტანის მეტოდი
+
+        public function StatementGet(int $id); // განაცხადის წამოღება აიდის მიხედვით
     }
 ?>
