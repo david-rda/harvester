@@ -85,4 +85,14 @@ class StatementController extends Controller implements IStatement
     public function StatementList() {
         return Statement::all();
     }
+
+    /**
+     * განაცხადის წამოღება აიდის მიხედვით
+     * @method GET
+     * @param int id
+     * @return json
+     */
+    public function StatementGet($id) {
+        return Statement::find($id);
+    }
 }

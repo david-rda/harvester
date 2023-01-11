@@ -27,6 +27,8 @@ Route::group(["prefix" => "statement", "middleware" => "auth:api"], function() {
     Route::post("/add", [StatementController::class, "CreateStatement"]);
 
     Route::get("/list", [StatementController::class, "StatementList"]);
+
+    Route::get("/get/{id}", [StatementController::class, "StatementGet"])->where(["id" => "[0-9]+"]);
 });
 
 ?>
