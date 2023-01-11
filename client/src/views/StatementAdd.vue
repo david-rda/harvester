@@ -243,7 +243,7 @@
                         </div>
 
                         <div class="row">
-                            <p>სულ: <big><b ref="total"></b></big>&nbsp;<big><b>GEL</b></big></p>
+                            <p>სულ: <big><b ref="total"></b>&nbsp;<b>GEL</b></big></p>
                         </div>
 
                         <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
@@ -268,7 +268,7 @@
 
                                             <div class="has-validation position-relative col-md-4 col-lg-4 col-sm-12 col-xs-12">
                                                 <label class="mb-1">კომპანიის წილის / პაის / აქციების მფლობელობა პროცენტებში / ერთეულებში</label>
-                                                <input type="text" ref="part" required class="form-control" placeholder="წილი" v-model="values_co['part' + key]" @change="percentOfShares()">
+                                                <input type="text" ref="part" required class="form-control" placeholder="წილი" v-model="values_co['part' + key]" @keyup="percentOfShares()">
                                                 <span class="invalid-tooltip">შეიყვანეთ წილი</span>
                                             </div>
                                         </div>
@@ -281,7 +281,7 @@
                         </div>
 
                         <div class="row mt-4" v-if="this.status == 'იურიდიული პირი'">
-                            <p>წილი: <big><b ref="percent_of_part">{{ this.totalPercent }}</b></big>&nbsp;<big><b>%</b></big></p>
+                            <p>წილი: <big><b ref="percent_of_part" :class="this.totalPercent > 100 ? 'text-danger' : ''">{{ this.totalPercent }}</b>&nbsp;<b>%</b></big></p>
                         </div>
                         <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
 
