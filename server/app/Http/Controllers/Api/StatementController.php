@@ -47,6 +47,8 @@ class StatementController extends Controller implements IStatement
             }
 
             for($i = 0; $i < sizeof($request->founder_fullname); $i++) {
+                if($request->founder_fullname[$i] == "undefined") continue;
+
                 Founder::insert([
                     "statement_id" => $create->id,
                     "fullname" => $request->founder_fullname[$i],
