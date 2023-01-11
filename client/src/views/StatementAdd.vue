@@ -215,7 +215,7 @@
                                     </div>
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">რაოდენობა</label>
-                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="1" @change="calculate()" @keyup="calculate()">
+                                        <input ref="quantity" type="number" required class="form-control" v-model="values['number_of_technic_' + key]" min="1" @keyup="calculate()">
                                         <span class="invalid-tooltip">შეიყვანეთ რაოდენობა</span>
                                     </div>
                                 </div>
