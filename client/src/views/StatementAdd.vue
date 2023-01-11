@@ -246,6 +246,36 @@
                             <p>სულ: <big><b ref="total"></b></big>&nbsp;<big><b>GEL</b></big></p>
                         </div>
 
+                        <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
+                        <div class="mb-4" v-if="this.status == 'იურიდიული პირი'">
+                            <div class="container-fluid p-3">
+                                <h6 class="col-md-4 mt-4">დამფუძნებლების / მეპაიეების სტრუქტურა</h6>
+
+                                <div class="row mb-4">
+                                    <div class="row">
+                                        <div class="has-validation position-relative col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                                            <label class="mb-1">დამფუძნებლის / მეპაიის სახელი, გვარი ( იურიდიული პირის შემთხვევაში დასახელება )</label>
+                                            <input type="text" required class="form-control" placeholder="დამფუძნებლის / მეპაიე ..." v-model="values['founder_fullname' + key]">
+                                            <span class="invalid-tooltip">შეიყვანეთ მეპაიეს სახელი, გვარი</span>
+                                        </div>
+
+                                        <div class="has-validation position-relative col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                                            <label class="mb-1">პირადი ნომერი / საიდენტიფიკაციო ნომერი</label>
+                                            <input type="text" required class="form-control" placeholder="პ/ნ. / ს/კ. ..." v-model="values['pid_idcode' + key]">
+                                            <span class="invalid-tooltip"></span>
+                                        </div>
+
+                                        <div class="has-validation position-relative col-md-4 col-lg-4 col-sm-12 col-xs-12">
+                                            <label class="mb-1">კომპანიის წილის / პაის / აქციების მფლობელობა პროცენტებში / ერთეულებში</label>
+                                            <input type="text" required class="form-control" placeholder="წილი" v-model="values['part' + key]">
+                                            <span class="invalid-tooltip">შეიყვანეთ წილი</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
+
                         <h6 class="col-md-4 mt-4">წარმოსადგენი დოკუმენტაციის ნუსხა</h6>
                         
                         <!-- პირადობის მოწმობის ასლის ფაილის ბლოკი-->
