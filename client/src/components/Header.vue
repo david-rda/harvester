@@ -30,7 +30,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto text-center">
                     <li class="nav-item dropdown">
-                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>{{ this.user }}</strong></a>
+                        <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><strong>{{ full_name }}</strong></a>
 
                         <ul class="dropdown-menu">
                             <li>
@@ -65,18 +65,14 @@
             }
         },
 
+        props : {
+            full_name : String
+        },
+
         async mounted() {
             const logged_in = window.localStorage.getItem("logged_in"); // სტორიჯიდან ლოგიკური მნიშვნელობის წამოღება არის თუ არა მომხმარებელი ავტორიზირებული
-            const id = window.localStorage.getItem("user_id"); // სტორიჯიდან ავტორიზირებული მომხმარებლის აიდის წამოღება
             
             if(!logged_in) this.$router.push("/"); // თუ მომხმარებელი არაა ავტორიზირებული არ მოხდება გვერდების ჩატვირთვა და გადამისამართდება ავტორიზაციის გვერდზე
-            
-            const user = await axios.get("/user/get/" + Number.parseInt(id), {
-                headers : {
-                    "Authorization" : `Bearer ${this.$store.state.token}`
-                }
-            }); // ავტორიზირებული მომხმარებლის ინფორმაციის წამოღება
-            this.user = user?.data?.name + " " + user?.data?.lastname;
 
             this.$store.dispatch("setRole"); // ჰედერის ყოველი ჩატვირთვისას store-ში ჩაიწერება ავტორიზირებული მომხმარებლის როლის აიდი
             this.$store.dispatch("setToken"); // ტოკენის შენახვა vuex სტორიში

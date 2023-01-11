@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header />
+        <Header :full_name="this.user_info?.name + ' ' + this.user_info?.lastname" />
 
         <div class="container mt-5 bg-white p-4">
             <div class="row">
