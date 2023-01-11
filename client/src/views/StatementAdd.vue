@@ -256,7 +256,7 @@
                                         <div class="row">
                                             <div class="has-validation position-relative col-md-5 col-lg-5 col-sm-12 col-xs-12">
                                                 <label class="mb-1">დამფუძნებლის / მეპაიის სახელი, გვარი ( იურიდიული პირის შემთხვევაში დასახელება )</label>
-                                                <input type="text" required class="form-control" placeholder="დამფუძნებლის / მეპაიე ..." v-model="values_co['founder_fullname' + key]">
+                                                <input type="text" required class="form-control" placeholder="დამფუძნებელი / მეპაიე ..." v-model="values_co['founder_fullname' + key]">
                                                 <span class="invalid-tooltip">შეიყვანეთ მეპაიეს სახელი, გვარი</span>
                                             </div>
 
