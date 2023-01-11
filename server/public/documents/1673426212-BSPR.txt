@@ -1,0 +1,36 @@
+1) composer require "darkaonline/l5-swagger"
+2) open your config/app.php and add this line: L5Swagger\L5SwaggerServiceProvider::class
+3) php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+4) Connect Database.
+5) php artisan migrate:fresh --seed
+
+=============================================
+მსგავსს ვამატებთ კონტროლერ ფაილში, რომელიც ლარაველს დეფოლტად აქვს შექმნილი
+/**
+ * @OA\Info(
+ *      title="დოკუმენტაციის სათაური",
+ *      version="0.1"
+ * )
+ */
+
+
+==============================================
+მსგავსს ვამატებთ მეთოდების აღწერისას
+
+/**
+* @OA\Get(
+*      path = "/wheat_api/public/api/show/{id}",
+* 
+*      @OA\Response(
+*          response="200",
+*          description = "აღწერა"
+*      ),
+* 
+*      @OA\Parameter(
+*          name = "id",
+*          in="path",
+*          description = "რეგიონის აიდი",
+*          required = true
+*      )
+*  )
+*/

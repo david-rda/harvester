@@ -11,6 +11,7 @@
                             <th>განაცხადი</th>
                             <th>დამატების თარიღი</th>
                             <th>სტატუსი</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -192,7 +193,7 @@
 
         data() {
             return {
-                show : false,
+                show : true,
                 full_date_string : "",
                 role : "",
                 statements : ""
@@ -223,7 +224,11 @@
                 });
                 
                 this.statements = statements?.data;
-                this.show = true;
+                if(this.statements.length > 0) {
+                    this.show = true;
+                }else {
+                    this.show = false;
+                }
             }catch(err) {
                 if(err instanceof AxiosError) {
                     console.log(err);
