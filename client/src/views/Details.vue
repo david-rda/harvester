@@ -1,9 +1,17 @@
 <template>
     <div>
         <Header />
-        <div class="container bg-white mt-5 p-4">
+        <div class="container bg-white mt-5 p-5">
             <div class="row">
                 <h6 class="col-lg-4 col-md-4">ზოგადი ინფორმაცია განმცხადებელზე</h6>
+            </div>
+
+            <div class="row">
+                <table>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
         </div>
         <Footer />
@@ -36,6 +44,7 @@
             try {
                 const statement_data = await axios.get("/statement/get/" + this.$route.params.id);
                 this.statement = statement_data?.data;
+                console.log(this.statement);
             }catch(err) {
                 if(err instanceof AxiosError) {
                     console.log(err?.response);
