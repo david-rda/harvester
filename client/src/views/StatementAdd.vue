@@ -268,7 +268,7 @@
 
                                             <div class="has-validation position-relative col-md-4 col-lg-4 col-sm-12 col-xs-12">
                                                 <label class="mb-1">კომპანიის წილის / პაის / აქციების მფლობელობა პროცენტებში / ერთეულებში</label>
-                                                <input type="text" required class="form-control" placeholder="წილი" v-model="values_co['part' + key]">
+                                                <input type="text" ref="part" required class="form-control" placeholder="წილი" v-model="values_co['part' + key]" @change="percentOfShares()">
                                                 <span class="invalid-tooltip">შეიყვანეთ წილი</span>
                                             </div>
                                         </div>
@@ -278,6 +278,10 @@
 
                             <button type="button" @click="addFounder()">დამფუძნებლის დამატება&nbsp;<BIconPlusLg /></button>
                             <button type="button" @click="removeFounder()" v-if="this.count_founders > 1" class="danger ms-2">დამფუძნებლის დამატება</button>
+                        </div>
+
+                        <div class="row mt-4" v-if="this.status == 'იურიდიული პირი'">
+                            <p>წილი: <big><b ref="percent_of_part">{{ this.totalPercent }}</b></big>&nbsp;<big><b>%</b></big></p>
                         </div>
                         <!-- მეწილეების გრაფა იურიდიული პირისთვის -->
 
@@ -511,7 +515,9 @@
                 usd_course : "", // ამ ცვლადში ინახება აშშ დოლარის კურსის მონაცემი
                 euro_course : "", // ამ ცვლადში ინახება ევროს კურსის მონაცემი
                 tot : 0, // გადასანაწილებელი თანხა
-                tot1 : 0 // ველებში შეყვანილი ჯამური თანხა
+                tot1 : 0, // ველებში შეყვანილი ჯამური თანხა
+
+                totalPercent : 0 // კომპანიის ჯამური წილი
             }
         },
 
@@ -579,6 +585,15 @@
 
                         this.tot1 = this.tot - percent; // აქ გამოითვლება გადასანაწილებელი თანხა
                     }
+                }
+            },
+
+            // კომპანიის მეწილეთა წილის ჯამი
+            percentOfShares() {
+                let p = 0; // აქ დაჯამდება საერთო წილი
+                for(let i = 0; i < this.$refs.part.length; i++) {
+                    p += Number.parseFloat(this.$refs.part[i].value);
+                    this.totalPercent = p;
                 }
             },
 
