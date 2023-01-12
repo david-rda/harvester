@@ -92,6 +92,7 @@ class Statement extends Model
         );
     }
 
+    // მეპაიების მონაცემების ჩასმა განაცხადების data-ში
     public function founders() : Attribute {
         return Attribute::make(
             get : fn() => $this->founder
