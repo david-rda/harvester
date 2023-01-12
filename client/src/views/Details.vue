@@ -7,7 +7,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-7 col-lg-7">
+                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
                     <table class="table">
                         <tbody>
                             <tr>
@@ -39,7 +39,13 @@
                 </div>
 
                 <div class="row">
-                    
+                    <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+                        <table class="table">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

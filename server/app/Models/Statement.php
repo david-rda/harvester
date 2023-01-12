@@ -49,11 +49,11 @@ class Statement extends Model
     ];
 
     protected $appends = [
-        "technics"
+        "technics", "founders"
     ];
 
     protected $hidden = [
-        "technic"
+        "technic", "founder"
     ];
 
     public $timestamps = true;
@@ -89,6 +89,12 @@ class Statement extends Model
     public function createdAt() : Attribute {
         return Attribute::make(
             get : fn($value) => $this->asDateTime($value)->setTimezone("Asia/Tbilisi")->format("m/d/Y H:i")
+        );
+    }
+
+    public function founders() : Attribute {
+        return Attribute::make(
+            get : fn() => $this->founder
         );
     }
 }
