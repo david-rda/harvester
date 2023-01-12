@@ -103,49 +103,73 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
-                        <div class="container-fluid bg-white p-4 mb-3" v-for="(data, index) in this.statement?.technics" :key="index">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <th>მოსავლის ამღები ტექნიკის დასახელება</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>მოდელი</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ძრავის სიმძლავრე ( ცხ/ძ - მხოლოდ ძრავიანი ტექნიკის შემთხვევაში )</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის გამოშვების თარიღი <span class="text-danger" data-v-33d3f4ec="">(არაუმეტეს 2 წლის)</span></th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის მწარმოებელი ქვეყანა</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის დანიშნულება (რისთვის გამოიყენება)</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის მომწოდებელი კომპანიის დასახელება</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის მომწოდებელი კომპანიის საიდენტიფიკაციო ნომერი</th>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th>ტექნიკის ღირებულება</th>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="container-fluid bg-white p-4 mb-4" v-for="(data, index) in this.statement?.technics" :key="index">
+                        <h4>#{{ index + 1 }}</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>მოსავლის ამღები ტექნიკის დასახელება</th>
+                                    <td>{{ data?.technic_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>მოდელი</th>
+                                    <td>{{ data?.technic_model }}</td>
+                                </tr>
+                                <tr>
+                                    <th>რაოდენობა</th>
+                                    <td>{{ data?.technic_quantity }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ძრავის სიმძლავრე ( ცხ/ძ - მხოლოდ ძრავიანი ტექნიკის შემთხვევაში )</th>
+                                    <td>{{ data?.technic_engine_speed }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის გამოშვების თარიღი <span class="text-danger" data-v-33d3f4ec="">(არაუმეტეს 2 წლის)</span></th>
+                                    <td>{{ data?.technic_issue_date }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის მწარმოებელი ქვეყანა</th>
+                                    <td>{{ data?.technic_manufacturer_country }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის დანიშნულება (რისთვის გამოიყენება)</th>
+                                    <td>{{ data?.technic_use_for }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის მომწოდებელი კომპანიის დასახელება</th>
+                                    <td>{{ data?.technic_supplier_company }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის მომწოდებელი კომპანიის საიდენტიფიკაციო ნომერი</th>
+                                    <td>{{ data?.technic_supplier_company_id_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th>ტექნიკის ღირებულება</th>
+                                    <td>{{ data?.technic_price }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="alert alert-danger mb-3 mt-3">
+                        <span>ტექნიკა არ უნდა იყოს ექსპლუატაციაში ნამყოფი.</span>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <h6 class="col-lg-6 col-md-6">დაფინანსების წყაროები</h6>
+                </div>
+
+                <div class="row">
+                    <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                        <label for="finance" class="mb-2">საკუთარი სახსრები/დაფინანსების სხვა ფულადი წყარო</label>
+                        <input type="text" ref="own_finance" class="form-control" placeholder="0 GEL" name="finance" id="finance" disabled>
+                    </div>
+                    <div class="mt-3 mb-4 col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                        <label for="agency_finance" class="mb-2">სააგენტოს დაფინანსება</label>
+                        <input type="text" ref="agency_finance" class="form-control" placeholder="0 GEL" name="agency_finance" id="agency_finance" disabled>
                     </div>
                 </div>
             </div>
@@ -203,5 +227,28 @@
     .container-fluid {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
+    }
+
+    .alert {
+        font-family: "frutiger_light";
+        font-size: 14px;
+        border: none !important;
+        user-select: none;
+    }
+
+    input[type="text"] {
+        border-radius: 8px;
+        border: 1px solid lighten(#787878, 45%) !important;
+        background-color: #FFF;
+        outline: none;
+        padding: 12px 14px;
+        width: 100%;
+        font-family: "frutiger_light";
+        font-size: 14px;
+    }
+
+    input[type="text"]:disabled {
+        background-color: rgb(236, 235, 235);
+        border: 1px solid #d2d0d0 !important;
     }
 </style>

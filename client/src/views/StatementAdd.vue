@@ -144,6 +144,7 @@
 
                         <div class="mb-4">
                             <div class="container-fluid mt-3 p-3" v-for="key in count" :key="key">
+                                <h4>#{{ key }}</h4>
                                 <div class="row">
                                     <div class="has-validation position-relative mb-3 mt-4 col-lg-6 col-md-6 col-xs-12 col-sm-12">
                                         <label class="mb-2">მოსავლის ამღები ტექნიკის დასახელება</label>
