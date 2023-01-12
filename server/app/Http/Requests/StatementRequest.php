@@ -49,6 +49,8 @@ class StatementRequest extends FormRequest
             "beneficiary_gender" => "required_if:beneficiary_gender, !=, null",
             "redistributable_price" => "required_if:redistributable_price,!=,null",
             "total_price" => "required_if:total_price,!=,null",
+            "agency_finance" => "required_if:agency_finance,!=,null",
+            "own_finance" => "required_if:own_finance,!=,null",
             "beneficiary_company_name" => "required_if:beneficiary_company_name, !=, null",
             "beneficiary_company_id_number" => "required_if:beneficiary_company_id_number, !=, null",
             "beneficiary_company_director" => "required_if:beneficiary_company_director, !=, null",
